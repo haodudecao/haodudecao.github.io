@@ -3,7 +3,7 @@ layout: post
 title: "PHP 错误级别"
 subtitle: 'error_reporting'
 author: "Hddc"
-header-style: text
+header-img: "img/post-bg-php-error-reporter.png"
 tags:
   - PHP
 ---
