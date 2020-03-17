@@ -12,7 +12,7 @@ tags:
 > 
 > 如果程序发生错误，我们能大致的分析出出现错误的原因，对于我们解决这戏错误会有很大的帮助。
 
-### ==Notice== 通知级别的错误，程序继续执行
+### Notice 通知级别的错误，程序继续执行
 ##### 1、直接使用未声明变量	
 ```
 echo $str; 
@@ -112,7 +112,7 @@ Fatal error: Uncaught TypeError: Argument 1 passed to add() must be of the type 
 
 
 ### Parse error 解析错误或语法错误,程序终止执行
-1、未加分号结束符 echo 'test'
+##### 1、未加分号结束符 echo 'test'
 
 ```
 $x =1;
@@ -122,7 +122,7 @@ echo $x;
 Parse error: syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';'
 ```
 
-2、括号没有结束 小括号或者大括号没有结束括号。
+##### 2、括号没有结束 小括号或者大括号没有结束括号。
 
 ```
 if (1==2){
@@ -132,14 +132,14 @@ Parse error: syntax error, unexpected end of file
 ```
 
 
-3、定义变量漏掉了$
+##### 3、定义变量漏掉了$
 ```
 y = "www.php.cn"; 
 echo $y;
 
 Parse error: syntax error, unexpected '=' 
 ```
-4、低版本的php不支持[] 低版本的php对于数组定义 不支持 $arr = [];
+##### 4、低版本的php不支持[] 低版本的php对于数组定义 不支持 $arr = [];
 ### Deprecated 最低级别的错误 —— 不推荐 或 不建议
 
 ```
@@ -173,6 +173,9 @@ Deprecated: Non-static method A::foo() should not be called statically in D:\www
 
 
 
+
+
+ 
 
 
  
