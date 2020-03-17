@@ -1,3 +1,14 @@
+---
+layout: post
+title: "GitLab Webhooks PHP"
+subtitle: '利用 gitlab 简单的自动更新'
+author: "Hux"
+header-style: text
+tags:
+  - Git
+  - GitLab
+  - Webhooks
+---
 ##  原理
 > 当 GitLab 项目内容有变动时,会去请求设置好的url,执行预置的脚本,自动更新代码 
 
