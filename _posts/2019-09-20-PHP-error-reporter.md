@@ -19,7 +19,9 @@ echo $str;
 
 Notice: Undefined variable: str
 
-PHP7.2版本开始：不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。 在以前，该行为会产生 E_NOTICE，但现在会产生 E_WARNING。在下一个 PHP 主版本中，将抛出 Error 异常。
+PHP7.2版本开始：不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。
+ 在以前，该行为会产生 E_NOTICE，但现在会产生 E_WARNING。
+ 在下一个 PHP 主版本中，将抛出 Error 异常。
 ```
 ##### 2、输出数组值时没有加引号 
 ```php
