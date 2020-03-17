@@ -4,6 +4,7 @@ title: "PHP 错误级别"
 subtitle: 'error_reporting'
 author: "Hddc"
 header-img: "img/post-bg-php-error-reporter.png"
+catalog: true
 tags:
   - PHP
 ---
