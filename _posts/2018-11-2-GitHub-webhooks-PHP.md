@@ -2,7 +2,7 @@
 layout: post
 title: "GitLab Webhooks PHP"
 subtitle: '利用 gitlab 简单的自动更新'
-author: "Hux"
+author: "HDDC"
 header-style: text
 tags:
   - Git
