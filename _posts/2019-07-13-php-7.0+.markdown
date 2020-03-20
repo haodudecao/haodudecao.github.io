@@ -19,7 +19,7 @@ tags:
 
 飞船符号
 
-```
+```php
 var_dump('PHP' <=> 'Node'); // int(1)
 var_dump(123 <=> 456); // int(-1)
 var_dump(['a', 'b'] <=> ['a', 'b']); // int(0)#比较字符串时，小写字母比大写字母大
@@ -64,7 +64,7 @@ echo $a <=> $b; // 1
 从左往右第一个存在且不为 NULL 的操作数。如果都没有定义(抛出notice错误)且不为 NULL，则返回 NULL。
 由于日常使用中存在大量同时使用三元表达式和 isset 操作。使用空合并运算符可以简化操作
 
-```
+```php
 // php7以前
 if (isset($_GET['a'])) {
   $a = $_GET['a'];
@@ -115,7 +115,7 @@ fun(3); // Fatal error
 
 php7 允许 **new class{}** 创建一个匿名的对象。
 
-```
+```php
 // php7以前
 class Logger
 {
@@ -148,7 +148,7 @@ echo "\u{9999}"; // 香
 
 闭包绑定简短干练的暂时绑定一个方法到对象上并立刻调用它。
 
-```
+```php
 class A {
     private $x = 1;
 }
@@ -169,7 +169,7 @@ echo $getX->call(new A);
 
 提供更安全的方式解包不可靠的数据。它通过白名单的方式来防止潜在的代码注入
 
-```
+```php
 // 将所有的对象都转换为 __PHP_Incomplete_Class 对象
 $data = unserialize($foo, ["allowed_classes" => false]);
 // 将除 MyClass 和 MyClass2 之外的所有对象都转换为 __PHP_Incomplete_Class 对象
@@ -182,7 +182,7 @@ $data = unserialize($foo, ["allowed_classes" => true]);
 
 这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装 intl 拓展
 
-```
+```php
 printf('%x', IntlChar::CODEPOINT_MAX);
 echo IntlChar::charName('@');
 var_dump(IntlChar::ispunct('!'));
@@ -192,7 +192,7 @@ var_dump(IntlChar::ispunct('!'));
 
 它使得在生产环境中启用断言为零成本，并且提供当断言失败时抛出特定异常的能力。以后可以使用这个这个进行断言测试
 
-```
+```php
 ini_set('assert.exception', 1);
 class CustomError extends AssertionError {}
 assert(false, new CustomError('Some error message'));
