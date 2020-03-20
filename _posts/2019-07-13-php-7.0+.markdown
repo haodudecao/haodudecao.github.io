@@ -1,0 +1,868 @@
+---
+layout:     post
+title:      "PHP7.0 至 PHP7.4 的新特性"
+subtitle:   "PHP 7.0+ new features"
+date:       2019-07-13
+author:     "Hd"
+header-img: "img/post-bg-js-module.jpg"
+catalog: true
+tags:
+    - PHP
+---
+# PHP7.0 至 PHP7.4 的新特性
+
+## PHP7.0
+
+### PHP7.0 新特性
+
+#### 1. 组合比较符（<=>）
+
+飞船符号
+
+```
+var_dump('PHP' <=> 'Node'); // int(1)
+var_dump(123 <=> 456); // int(-1)
+var_dump(['a', 'b'] <=> ['a', 'b']); // int(0)#比较字符串时，小写字母比大写字母大
+
+// Floats
+echo 1.5 <=> 1.5; // 0
+echo 1.5 <=> 2.5; // -1
+echo 2.5 <=> 1.5; // 1
+
+// Strings
+echo "a" <=> "a"; // 0
+echo "a" <=> "b"; // -1
+echo "b" <=> "a"; // 1
+echo "a" <=> "aa"; // -1
+echo "zz" <=> "aa"; // 1
+
+// Arrays
+echo [] <=> []; // 0
+echo [1, 2, 3] <=> [1, 2, 3]; // 0
+echo [1, 2, 3] <=> []; // 1
+echo [1, 2, 3] <=> [1, 2, 1]; // 1
+echo [1, 2, 3] <=> [1, 2, 4]; // -
+
+// Objects
+$a = (object) ["a" => "b"];
+$b = (object) ["a" => "b"];
+echo $a <=> $b; // 0
+$a = (object) ["a" => "b"];
+$b = (object) ["a" => "c"];
+echo $a <=> $b; // -1
+$a = (object) ["a" => "c"];
+$b = (object) ["a" => "b"];
+echo $a <=> $b; // 1
+
+// only values are compared
+$a = (object) ["a" => "b"];
+$b = (object) ["b" => "b"];
+echo $a <=> $b; // 1
+```
+
+#### 2. null 合并运算符
+从左往右第一个存在且不为 NULL 的操作数。如果都没有定义(抛出notice错误)且不为 NULL，则返回 NULL。
+由于日常使用中存在大量同时使用三元表达式和 isset 操作。使用空合并运算符可以简化操作
+
+```
+// php7以前
+if (isset($_GET['a'])) {
+  $a = $_GET['a'];
+}
+// php5.3-php7 三元简写
+$a = isset($_GET['a']) ? $_GET['a'] : 'none';
+// PHP 7
+$a = $_GET['a'] ?? 'none';
+```
+
+#### 3. 变量类型声明(类型约束)
+
+变量类型声明有两种模式。允许使用下列类型参数**int**，**string**，**float**，**bool**
+
+同时不能再使用整型，字符串，浮点型，布尔作为类的名字了
+建议定义函数都加上，调用的时候能有更好的提示。
+
+限制参数为 int 和float 时,如果传参类型错误(字符串不为数字型字符串)会抛出致命错误 
+```php
+function sumOfInts(int ...$ints)
+{
+    return array_sum($ints);
+}
+var_dump(sumOfInts(2, '3', 4.1)); // int(9)
+// 严格模式
+declare(strict_types = 1);
+function add(int $x, int $y)
+{
+    return $x + $y;
+}
+var_dump(add('2', 3)); // Fatal error: Argument 1 passed to add() must be of the type integer
+```
+
+#### 4. 返回值类型声明
+
+增加了返回类型声明，类似参数类型这样更方便的控制函数的返回值在函数定义的后面加上：类型名即可
+
+限制为 int 和float 时,如果传参类型错误会抛出致命错误 
+``` php
+function fun(int $a): array
+{
+  return $a;
+}
+fun(3); // Fatal error
+```
+
+#### 5. 匿名类
+
+php7 允许 **new class{}** 创建一个匿名的对象。
+
+```
+// php7以前
+class Logger
+{
+    public function log($msg)
+    {
+        echo $msg;
+    }
+}
+$util->setLogger(new Logger());
+// php7+
+$util->setLogger(new class {
+    public function log($msg)
+    {
+        echo $msg;
+    }
+});
+```
+
+#### 6. Unicode codepoint 转译语法
+
+这接受一个以 16 进制形式的 Unicode codepoint，并打印出一个双引号或 heredoc 包围的 UTF-8 编码格式的字符串。可以接受任何有效的 codepoint，并且开头的 0 是可以省略的
+
+```php 
+echo "\u{aa}"; // ª
+echo "\u{0000aa}"; // ª
+echo "\u{9999}"; // 香
+```
+
+#### 7.闭包绑定 Closure :: call
+
+闭包绑定简短干练的暂时绑定一个方法到对象上并立刻调用它。
+
+```
+class A {
+    private $x = 1;
+}
+// PHP 7 之前版本的代码
+$getXCB = function() {
+    return $this->x;
+};
+$getX = $getXCB->bindTo(new A, 'A'); // 中间层闭包
+echo $getX();
+// PHP 7+ 及更高版本的代码
+$getX = function() {
+    return $this->x;
+};
+echo $getX->call(new A);
+```
+
+#### 8. 带过滤的反序列化
+
+提供更安全的方式解包不可靠的数据。它通过白名单的方式来防止潜在的代码注入
+
+```
+// 将所有的对象都转换为 __PHP_Incomplete_Class 对象
+$data = unserialize($foo, ["allowed_classes" => false]);
+// 将除 MyClass 和 MyClass2 之外的所有对象都转换为 __PHP_Incomplete_Class 对象
+$data = unserialize($foo, ["allowed_classes" => ["MyClass", "MyClass2"]);
+// 默认情况下所有的类都是可接受的，等同于省略第二个参数
+$data = unserialize($foo, ["allowed_classes" => true]);
+```
+
+#### 9. IntlChar 类
+
+这个类自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装 intl 拓展
+
+```
+printf('%x', IntlChar::CODEPOINT_MAX);
+echo IntlChar::charName('@');
+var_dump(IntlChar::ispunct('!'));
+```
+
+#### 10. 预期
+
+它使得在生产环境中启用断言为零成本，并且提供当断言失败时抛出特定异常的能力。以后可以使用这个这个进行断言测试
+
+```
+ini_set('assert.exception', 1);
+class CustomError extends AssertionError {}
+assert(false, new CustomError('Some error message'));
+```
+
+#### 11. 命名空间按组导入
+
+从同一个命名空间下导入的类，函数，常量支持按组一次导入
+
+```php
+// php7以前
+use app\model\A;
+use app\model\B;
+// php7+
+use app\model{A, B};
+```
+
+#### 12. 生成器支持返回表达式
+
+它允许在生成器函数中通过使用  _return_  语法来返回一个表达式（但是不允许返回引用值），可以通过调用  `_Generator :: getReturn（）_`
+ 方法来获取生成器的返回值，但是这个方法只能在生成器完成产生工作以后调用一次。
+
+```php
+$gen = (function() {
+    yield 1;
+    yield 2;
+    return 3;
+})();
+foreach ($gen as $val) {
+    echo $val, PHP_EOL;
+}
+echo $gen->getReturn(), PHP_EOL;
+// output
+// 1
+// 2
+// 3
+```
+
+#### 13. 生成器委派
+
+现在，只需在最外层生成其中使用 yield from，就可以把一个生成器自动委派给其他的生成器
+
+```php 
+function gen()
+{
+    yield 1;
+    yield 2;
+    yield from gen2();
+}
+function gen2()
+{
+    yield 3;
+    yield 4;
+}
+foreach (gen() as $val)
+{
+    echo $val, PHP_EOL;
+}
+```
+
+#### 14. 整数除法函数 intdiv
+
+```php
+var_dump(intdiv(10, 3)) // 3
+```
+
+#### 15. 会话选项设置
+
+session_start() 可以加入一个数组覆盖 php.ini 的配置
+
+```php
+session_start([
+    'cache_limiter' => 'private',
+    'read_and_close' => true,
+]);
+```
+
+#### 16. preg_replace_callback_array
+
+可以使用一个关联数组来对每个正则表达式注册回调函数，正则表达式本身作为关联数组的键，而对应的回调函数就是关联数组的值
+
+```php
+string preg_replace_callback_array(array $regexesAndCallbacks, string $input);
+$tokenStream = []; // [tokenName, lexeme] pairs
+$input = <<<'end'
+$a = 3; // variable initialisation
+end;
+// Pre PHP 7 code
+preg_replace_callback(
+    [
+        '~\$[a-z_][a-z\d_]*~i',
+        '~=~',
+        '~[\d]+~',
+        '~;~',
+        '~//.*~'
+    ],
+    function ($match) use (&$tokenStream) {
+        if (strpos($match[0], '$') === 0) {
+            $tokenStream[] = ['T_VARIABLE', $match[0]];
+        } elseif (strpos($match[0], '=') === 0) {
+            $tokenStream[] = ['T_ASSIGN', $match[0]];
+        } elseif (ctype_digit($match[0])) {
+            $tokenStream[] = ['T_NUM', $match[0]];
+        } elseif (strpos($match[0], ';') === 0) {
+            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
+        } elseif (strpos($match[0], '//') === 0) {
+            $tokenStream[] = ['T_COMMENT', $match[0]];
+        }
+    },
+    $input
+);
+// PHP 7+ code
+preg_replace_callback_array(
+    [
+        '~\$[a-z_][a-z\d_]*~i' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_VARIABLE', $match[0]];
+        },
+        '~=~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_ASSIGN', $match[0]];
+        },
+        '~[\d]+~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_NUM', $match[0]];
+        },
+        '~;~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_TERMINATE_STMT', $match[0]];
+        },
+        '~//.*~' => function ($match) use (&$tokenStream) {
+            $tokenStream[] = ['T_COMMENT', $match[0]];
+        }
+    ],
+    $input
+);
+```
+
+#### 17. 随机数，随机字符函数
+
+```php
+string random_bytes(int length);
+int random_int(int min, int max);
+```
+
+#### 18.define支持定义数组
+
+```php
+// php7+
+define('ALLOWED_IMAGE_EXTENSIONS', ['jpg', 'jpeg', 'gif', 'png']);
+```
+
+### PHP7.0 变化
+
+#### 1. 错误和异常处理相关变更
+
+PHP 7 改变了大多数错误的报告方式。不同于传统（PHP 5）的错误报告机制，现在大多数错误被作为  **Error**  异常抛出。
+
+这也意味着，当前生错误的时候，以前代码中的一些错误处理的代码将无法被触发。因为在 PHP 7 版本中，已经使用抛出异常的错误处理机制了。（如果代码中没有捕获  **Error**  异常，那么会引发致命错误）.set_error_handle 不一定接收的是异常，有可能是错误。
+
+ERROR 层级结构
+
+```php
+interface Throwable
+    |- Exception implements Throwable
+        |- ...
+    |- Error implements Throwable
+        |- TypeError extends Error
+        |- ParseError extends Error
+        |- AssertionError extends Error
+        |- ArithmeticError extends Error
+            |- DivisionByZeroError extends ArithmeticError
+```
+
+```php
+function handler(Exception $e) { ... }
+set_exception_handler('handler');
+// 兼容 PHP 5 和 7
+function handler($e) { ... }
+// 仅支持 PHP 7
+function handler(Throwable $e) { ... }
+```
+
+#### 2. list
+
+list 会按照原来的顺序进行赋值。不再是逆序了
+
+``` php
+list($a,$b,$c) = [1, 2, 3];
+var_dump($a); // 1
+var_dump($b); // 2
+var_dump($c); // 3
+```
+
+list 不再支持解开字符串，
+
+#### 3. foreach 不再改变内部数组指针
+
+```php
+$array = [0, 1, 2];
+foreach ($array as &$val) {
+    var_dump(current($array));
+}
+// php 5
+int(1)
+int(2)
+bool(false)
+// php7
+int(0)
+int(0)
+int(0)
+```
+
+#### 4. 十六进制字符串不再被认为是数字
+
+```php
+var_dump("0x123" == "291");
+// php5
+true
+// php7
+false
+```
+
+#### 5. $HTTP_RAW_POST_DATA 被移
+
+`$HTTP_RAW_POST_DATA` 被移，使用 `php://input` 代替
+
+#### 6. 移除了 ASP 和脚本 PHP 标签
+
+| 开标签 | 闭标签 |
+| --- | --- |
+| `<%` | `%>` |
+| `<%=` | `%>` |
+| `<script language="php">` | `</script>` |
+
+## PHP7.1
+
+### PHP7.1 新特性
+
+#### 1. 可为空（Nullable）类型
+
+参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是 null
+
+```php
+// php5
+function($a = null){
+  if ($a === null) {
+    return null;
+  }
+  return $a;
+}
+// php7+
+function fun() :?string
+{
+  return null;
+}
+function fun1(?$a)
+{
+  var_dump($a);
+}
+fun1(null); // null
+fun1('1'); // 1
+```
+
+#### void 类型
+
+返回值声明为 void 类型的方法要么干脆省去 return 语句。对于 void 来说，**NULL**  不是一个合法的返回值。
+
+```php
+function fun() :void
+{
+  echo "hello world";
+}
+```
+
+#### 3. 类常量可见性
+
+```php
+class Something
+{
+    const PUBLIC_CONST_A = 1;
+    public const PUBLIC_CONST_B = 2;
+    protected const PROTECTED_CONST = 3;
+    private const PRIVATE_CONST = 4;
+}
+```
+
+#### 4. iterable 伪类
+
+这可以被用在参数或者返回值类型中，它代表接受数组或者实现了**Traversable 的**接口的对象。
+
+```php
+function iterator(iterable $iter)
+{
+    foreach ($iter as $val) {
+        //
+    }
+}
+```
+
+#### 5. 多异常捕获处理
+
+一个 catch 语句块现在可以通过管道字符（_|_ ）来实现多个异常的捕获。这对于需要同时处理来自不同类的不同异常时很有用
+
+```php
+try {
+    // some code
+} catch (FirstException | SecondException $e) {
+    // handle first and second exceptions
+}
+```
+
+#### 6. list 支持键名
+
+```php
+$data = [
+    ["id" => 1, "name" => 'Tom'],
+    ["id" => 2, "name" => 'Fred'],
+];
+// list() style
+list("id" => $id1, "name" => $name1) = $data[0];
+var_dump($id1); // 1
+```
+
+#### 7. 字符串支持负向
+
+```php
+$a = "hello";
+$a[-2]; // l
+```
+
+#### 8. 将 Closure 转闭包
+
+Closure 新增了一个静态方法，用于将 callable 快速地转为一个 Closure 对象。
+
+```php
+class Test
+{
+    public function exposeFunction()
+    {
+        return Closure::fromCallable([$this, 'privateFunction']);
+    }
+    private function privateFunction($param)
+    {
+        var_dump($param);
+    }
+}
+$privFunc = (new Test)->exposeFunction();
+$privFunc('some value');
+```
+
+#### 9. http2 服务推送
+
+对 http2 服务器推送的支持现在已经被加入到 CURL 扩展
+
+### PHP7.1 变更
+
+#### 1. 传递参数过少时将抛出错误
+
+过去我们传递参数过少会产生 warning.php7.1 开始会抛出fatal error
+
+#### 2. 移除了 ext / mcrypt 拓展
+
+## PHP7.2
+
+### PHP7.2 新特性
+
+#### 增加新的类型对象
+
+```php
+function test(object $obj) : object
+{
+    return new SplQueue();
+}
+test(new StdClass());
+```
+
+#### 2. 通过名称加载扩展
+
+扩展文件不再需要通过文件加载（Unix 下以_.so_为文件扩展名，在 Windows 下以  _.dll_  为文件扩展名）进行指定。可以在 php.ini 配置文件进行启用
+
+```ini
+; ini file
+extension=php-ast
+zend_extension=opcache
+```
+
+#### 3. 允许重写抽象方法
+
+当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法。
+
+```php
+abstract class A
+{
+    abstract function test(string $s);
+}
+abstract class B extends A
+{
+    // overridden - still maintaining contravariance for parameters and covariance for return
+    abstract function test($s) : int;
+}
+```
+
+#### 4. 使用 Argon2 算法生成密码散列
+
+Argon2 已被加入到密码散列（password hashing）API（这些函数以 _password_  _开头），以下是暴露出来的常量
+#### 5. 新增 PDO 字符串扩展类型
+当你准备支持多语言字符集，PDO 的字符串类型已经扩展支持国际化的字符集以下是扩展的常量：
+* PDO :: PARAM_STR_NATL
+* PDO :: PARAM_STR_CHAR
+* PDO :: ATTR_DEFAULT_STR_PARAM
+``` php
+$db->quote('über', PDO::PARAM_STR | PDO::PARAM_STR_NATL);
+```
+#### 6. 命名分组命名空间支持尾部逗号
+``` php
+use Foo\Bar\{
+    Foo,
+    Bar,
+    Baz,
+};
+```
+### PHP7.2 变更
+#### 1. number_format 返回值
+```php
+var_dump(number_format(-0.01)); // now outputs string(1) "0" instead of string(2) "-0"
+```
+#### 2. get_class（）不再允许 null
+```php
+var_dump(get_class(null)); // warning
+```
+#### 3. count 作用在不是可数类型(Countable Types)将发生 warning
+```php
+count(1); // integers are not countable
+```
+#### 4. 不带引号的字符串
+在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。，但现在会产生 E_WARNING。
+```php
+var_dump(HEELLO);
+```
+#### 5. __autoload 被废弃
+__autoload 方法已被废弃
+#### 6. each 被废弃
+使用此函数遍历时，比普通的的 _foreach_  更慢，并且给新语法的变化带来实现问题。因此它被废弃了。
+
+#### 7. is_object，gettype 修正
+
+is_object 作用在 **__ PHP_Incomplete_Class**
+
+将 gettype 作用在闭包在将正确返回的 resource
+
+#### 8. 转换对象/数组转换中的数字键
+
+把数组转对象的时候，可以访问到整型键的值。
+
+```php
+// array to object
+$arr = [0 => 1];
+$obj = (object)$arr;
+var_dump(
+    $obj,
+    $obj->{'0'}, // now accessible
+    $obj->{0} // now accessible
+);
+```
+
+### PHP7.3
+2、在函数调用中允许使用尾随逗号
+
+```php
+foo(
+    $bar,
+    $baz,
+);
+
+var_dump(
+    $foo,
+    $bar,
+    $baz,
+);
+```
+
+
+3、JSON_THROW_ON_ERROR
+PHP 7.3带来的最受欢迎的功能之一提供了一种处理JSON错误的新方法。这不是核心功能，而是JSON扩展的一个补充，它将改变json_decode（）和json_encode（）的错误行为。
+
+目前，json_decode()返回null错误，但null也可以是有效的结果。这可能令人困惑，因为
+
+只能通过调用json_last_error()或者知道是否发生错误json_last_error_msg()，它分别以机器可读和人类可读的形式返回全局错误状态。- PHP RFC
+
+  json_encode()返回FALSE错误。这更清楚，因为存在特定的错误值。无论如何，这两个函数既不会在出错时停止程序执行，也不会抛出任何警告。
+
+
+```
+try {
+
+    json_decode("{", false, 512, JSON_THROW_ON_ERROR);
+
+}
+
+catch (\JsonException $exception) {
+
+    echo $exception->getMessage(); // echoes "Syntax error"
+
+}
+```
+
+
+4、list（）参考分配
+
+```
+$array = [1, 2];
+
+list($a, &$b) = $array;
+
+$array = [1, 2];
+
+$a = $array[0];
+
+$b =& $array[1];
+```
+
+
+5、is_countable函数
+  PHP 7.3附带的另一个功能是is_countable()功能。我们在尝试count（）不可数的东西时会收到错误。出于这个原因，为了避免警告，我们被迫添加以下代码：
+
+```
+if (is_array($foo) || $foo instanceof Countable) {
+
+    // $foo is countable
+
+}
+```
+
+
+  这个RFC提出了函数is_countable（），true如果给定变量是一个数组，它返回，false否则它是一个可数变量。因此，上面的代码可以更改如下：
+
+
+```
+if (is_countable($foo)) {
+
+    // $foo is countable
+
+}
+```
+
+* 添加了 array_key_first() 和 array_key_last() 来获取数组的第一个和最后一个元素的键名
+* 添加了 fpm_get_status() 方法，来获取 FPM 状态数组，
+* 添加了几个 FPM 的配置项，用来控制日志单行最大字符数，日志缓冲等：log_limit，log_buffering，decorate_workers_output
+* 现在需要 libcurl >= 7.15.5
+* curl 添加了一堆常量
+* json_decode 添加了一个常量，JSON_THROW_ON_ERROR，如果解析失败可以抛出异常，而不是通过之前的方法 json_last_error() 去获取
+* spl autoloader：如果一个加载失败，剩下的都不再执行
+* 说明了一些循环引用的情况会得到怎样的结果
+* heredoc/nowdoc 中如果遇到跟定界符相同的字符串就认为结束了，而最后真正的结束符则会被认为是语法错误;
+* 在循环+ switch-case 语句的 case 中使用继会会报警
+* 说明了，静态变量在被遗承时，如果在子类里发生了循环引用，父类里的静态变量会跟着变
+
+
+
+
+### PHP7.4的新特性和使用场景
+  PHP 7.4可能会在2019年12月发布。
+
+1、预加载
+预加载是 PHP 核心的一个惊人的补充，可以带来一些重大的性能改进。
+
+简而言之：如果您今天使用的是框架，则必须在每次请求时加载和重新编译其文件。预加载允许 服务器 在启动时在内存中加载 PHP 文件，并使它们永久可用于所有后续请求。
+
+性能提升当然需要付出代价：如果预加载文件的来源发生变化，则必须重新启动服务器。
+
+此特性可以大幅提升IO性能，性能提升约30－50％，甚至更高。
+
+2、类属性类型声明
+类变量可以加类型提示：
+
+此RFC已被接受，并在PHP7.4 中实施。
+
+```
+class A
+
+{
+
+    public string $name;
+
+    public Foo $foo;
+
+}
+```
+
+3、协变返回和逆变参数
+我以前写过PHP的类型系统，所以很高兴看到一些改进实际上是在PHP的核心。
+
+类型变化 简而言之：你将能够使用协变返回类型……
+
+
+```
+class ParentType {}
+
+class ChildType extends ParentType {}
+
+class A
+
+{
+
+    public function covariantReturnTypes(): ParentType
+
+    { /* … */ }
+
+}
+
+class B extends A
+
+{
+
+    public function covariantReturnTypes(): ChildType
+
+    { /* … */ }
+
+}
+
+……和逆变参数。
+
+class A
+
+{
+
+    public function contraVariantArguments(ChildType $type)
+
+    { /* … */ }
+
+}
+
+class B extends A
+
+{
+
+    public function contraVariantArguments(ParentType $type)
+
+    { /* … */ }
+
+}
+```
+
+4、空融合赋值运算符
+  代替如下写法：
+
+
+```
+$data['date'] = $data['date'] ?? new DateTime();
+```
+
+  你可以这样做：
+
+
+```
+$data['date'] ??= new DateTime();
+```
+
+
+  此RFC已被接受，但尚未合并; 我们尚未100％确定它最终是否在PHP 7.4实施。
+
+5、外部函数接口
+外部函数接口，简称FFI，允许从用户区调用C代码。这意味着PHP扩展可以用纯PHP编写。
+
+应该指出，这是一个复杂的主题。您仍然需要C知识才能正确使用此功能。
+
+现在终于能在PHP程序中写 C语言 了！！！
+
+6、hash扩展始终启用
+  正如标题所说，这个扩展现在可以在所有PHP安装中永久使用。
+  
+## 参考资料
+* http://php.net/manual/zh/migration70.new-features.php
+* http://php.net/manual/zh/migration71.new-features.php
+* http://php.net/manual/zh/migration72.new-features.php
+* http://php.net/manual/zh/migration73.new-features.php

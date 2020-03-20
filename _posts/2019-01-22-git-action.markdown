@@ -3,7 +3,7 @@ layout:     post
 title:      "Git 常用操作"
 subtitle:   "Git tool table"
 date:       2019-01-22
-author:     "HDDC"
+author:     "Hd"
 header-img: "img/post-bg-js-module.jpg"
 catalog: true
 tags:
