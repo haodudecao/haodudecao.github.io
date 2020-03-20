@@ -6,7 +6,6 @@ subtitle:   "On the importance of learning English well
 date:       2019-06-07
 author:     "HaoDu"
 header-img: "img/post-bg-learn-english.jpg"
-catalog: true
 tags:
     - 随感
     - english
