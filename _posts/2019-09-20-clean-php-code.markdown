@@ -1,9 +1,8 @@
 ---
 layout:     post
 title:      "PHP 简洁之道"
-subtitle:   "On the importance of learning English well
-"
-date:       2019-06-07
+subtitle:   "clean PHP code"
+date:       2019-09-20
 author:     "HaoDu"
 #header-img: "img/post-bg-learn-english.jpg"
 tags:
