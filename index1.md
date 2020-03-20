@@ -1,4 +1,4 @@
-## Welcome to HDDC Pages
+## Welcome to HDDC
 
 You can use the [editor on GitHub](https://github.com/haodudecao/haodudecao.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
