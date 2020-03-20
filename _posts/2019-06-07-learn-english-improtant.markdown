@@ -15,7 +15,7 @@ tags:
 
 ## 在 PHP 官网查看 const 类常量相关信息
 
-[中文]|(https://www.php.net/manual/zh/language.oop5.visibility.php)
+[中文](https://www.php.net/manual/zh/language.oop5.visibility.php) |
 [English](https://www.php.net/manual/en/language.oop5.visibility.php) 
 
 其中中文版的是开篇介绍是这样的
