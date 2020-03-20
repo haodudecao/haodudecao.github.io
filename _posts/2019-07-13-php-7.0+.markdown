@@ -862,7 +862,7 @@ $data['date'] ??= new DateTime();
   正如标题所说，这个扩展现在可以在所有PHP安装中永久使用。
   
 ## 参考资料
-* http://php.net/manual/zh/migration70.new-features.php
+* [http://php.net/manual/zh/migration70.new-features.php]
 * http://php.net/manual/zh/migration71.new-features.php
 * http://php.net/manual/zh/migration72.new-features.php
 * http://php.net/manual/zh/migration73.new-features.php
