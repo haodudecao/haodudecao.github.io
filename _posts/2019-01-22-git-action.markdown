@@ -1,13 +1,12 @@
 ---
 layout:     post
 title:      "Git 常用操作"
-subtitle:   "git 查询 工具"
+subtitle:   "Git tool table"
 date:       2019-01-22
 author:     "HDDC"
 header-img: "img/post-bg-js-module.jpg"
 catalog: true
 tags:
-    - 笔记
     - Git
     - tool
 ---
