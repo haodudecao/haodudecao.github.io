@@ -8,7 +8,10 @@ author:     "HaoDu"
 header-img: "img/post-bg-learn-english.jpg"
 catalog: true
 tags:
+    - 随感
+    - english
     - PHP
+    
 ---
 
 ## 在 PHP 官网查看 const 类常量相关信息
