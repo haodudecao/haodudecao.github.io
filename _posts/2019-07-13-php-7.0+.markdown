@@ -682,7 +682,7 @@ PHP 7.3带来的最受欢迎的功能之一提供了一种处理JSON错误的新
   json_encode()返回FALSE错误。这更清楚，因为存在特定的错误值。无论如何，这两个函数既不会在出错时停止程序执行，也不会抛出任何警告。
 
 
-```
+```php
 try {
 
     json_decode("{", false, 512, JSON_THROW_ON_ERROR);
@@ -699,7 +699,7 @@ catch (\JsonException $exception) {
 
 4、list（）参考分配
 
-```
+```php
 $array = [1, 2];
 
 list($a, &$b) = $array;
@@ -715,7 +715,7 @@ $b =& $array[1];
 5、is_countable函数
   PHP 7.3附带的另一个功能是is_countable()功能。我们在尝试count（）不可数的东西时会收到错误。出于这个原因，为了避免警告，我们被迫添加以下代码：
 
-```
+```php
 if (is_array($foo) || $foo instanceof Countable) {
 
     // $foo is countable
@@ -727,7 +727,7 @@ if (is_array($foo) || $foo instanceof Countable) {
   这个RFC提出了函数is_countable（），true如果给定变量是一个数组，它返回，false否则它是一个可数变量。因此，上面的代码可以更改如下：
 
 
-```
+```php
 if (is_countable($foo)) {
 
     // $foo is countable
@@ -767,7 +767,7 @@ if (is_countable($foo)) {
 
 此RFC已被接受，并在PHP7.4 中实施。
 
-```
+```php
 class A
 
 {
@@ -785,7 +785,7 @@ class A
 类型变化 简而言之：你将能够使用协变返回类型……
 
 
-```
+```php
 class ParentType {}
 
 class ChildType extends ParentType {}
@@ -837,7 +837,7 @@ class B extends A
   代替如下写法：
 
 
-```
+```php
 $data['date'] = $data['date'] ?? new DateTime();
 ```
 
