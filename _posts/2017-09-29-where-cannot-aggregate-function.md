@@ -17,7 +17,7 @@ where 子句是对逐条的行记录进行筛选
 
 ```sql
 delete from Person where Id in 
-(select max(Id) from Person group by Email having count(Id) > 1);
+(select max(Id) from Person where count(Id) > 0 group by Email );
 
 ```
 
