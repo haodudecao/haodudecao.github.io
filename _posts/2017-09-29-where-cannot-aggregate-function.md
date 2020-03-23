@@ -24,7 +24,7 @@ delete from Person where Id in
 与where子句不能出现聚集函数正相反的是，我们几乎看不到不使用聚集函数的having子句。为什么？因为在水平方向上根据外部指定条件的筛选（也就是对行的筛选），where子句可以独立完成，剩下的往往都是需要根据结果集自身的统计数据进一步筛选了，这时，几乎都需要通过having子句配合聚集函数来完成。
 
 ```sql
-delete from Person where Id in (select max(Id) from Person   where count(id) > 1 group by Email );
+select Id,Email from Person group by Email having count(Id) > 1;
 ```
 
 
