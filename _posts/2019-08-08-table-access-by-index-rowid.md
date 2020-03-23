@@ -4,9 +4,10 @@ title: "MySQL 回表"
 author: "HaoDu"
 subtitle: 'TABLE ACCESS BY INDEX ROWID'
 header-style: text
-tags:
 date:       2019-08-08
+tags:
   - MySQL
+
 ---
 丁奇老师在 《MySQL 实战 45 讲》中说到回表
 ### 什么是回表？
