@@ -16,8 +16,7 @@ where 子句是对逐条的行记录进行筛选
 所以下边 sql 会报错  **Invalid use of group function**
 
 ```sql
-delete from Person where Id in 
-(select max(Id) from Person where count(Id) > 0 group by Email );
+select Id,Email from Person where count(Id) > 1 group by Email;
 
 ```
 
