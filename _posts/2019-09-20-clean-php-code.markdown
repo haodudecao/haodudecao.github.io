@@ -5,6 +5,7 @@ subtitle:   "clean PHP code"
 date:       2019-09-20
 author:     "HaoDu"
 #header-img: "img/post-bg-learn-english.jpg"
+category: true
 tags:
     - english
     - PHP
