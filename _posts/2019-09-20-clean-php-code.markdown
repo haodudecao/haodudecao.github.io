@@ -7,7 +7,7 @@ author:     "HaoDu"
 #header-img: "img/post-bg-learn-english.jpg"
 catalog: true
 tags:
-    - english
+    - English
     - PHP
     
 ---
