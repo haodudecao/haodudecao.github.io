@@ -40,5 +40,5 @@ update message set content='Hello World' where id in
   ( select min(id) as min_id from message) g
 )
 ```
-****但请注意，从MySQL 5.7.6开始，优化器可能会优化子查询并仍然给您错误，除非您SET optimizer_switch = 'derived_merge=off';：***
+* ***但请注意，从MySQL 5.7.6开始，优化器可能会优化子查询并仍然给您错误，除非您SET optimizer_switch = 'derived_merge=off';***
 
