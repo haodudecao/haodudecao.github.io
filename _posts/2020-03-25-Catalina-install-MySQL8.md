@@ -13,6 +13,7 @@ tags:
 这里先记录下解决 MySQL 问题的过程 
 
 1. 先尝试在 terminal 中启动 mysql
+
 ```
 mysql -uroot 
 
