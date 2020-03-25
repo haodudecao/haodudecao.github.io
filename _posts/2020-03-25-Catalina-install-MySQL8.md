@@ -21,6 +21,7 @@ ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mys
 ```
 想到可能是服务没启动
 2.  启动服务
+
 ```
 mysql.server restart
 
