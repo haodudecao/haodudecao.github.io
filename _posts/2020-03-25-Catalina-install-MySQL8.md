@@ -8,9 +8,9 @@ tags:
 ---
 
 ## 前因
-近日由于升级了 Catalina 系统，原有的LAMP 环境崩溃了，PHP 项目可能是因为在用户根目录，被强制迁移了；
+近日由于升级了 Catalina 系统，原有的 LAMP 环境崩溃了，PHP 项目可能是因为在用户根目录，被强制迁移了；
 ## 过程
-这里先记录下解决 MySQL 问题的过程 
+这里先记录下解决 `MySQL` 问题的过程 
 
 1. 先尝试在 terminal 中启动 mysql
 
@@ -19,8 +19,9 @@ mysql -uroot
 
 ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
 ```
-想到可能是服务没启动
-2.  启动服务
+ 想到可能是服务没启动
+ 
+2. 启动服务
 
 ```
 mysql.server restart
