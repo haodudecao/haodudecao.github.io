@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "PHP 简洁之道"
+title:      "PHP 整洁之道"
 subtitle:   "clean PHP code"
 date:       2019-09-20
 author:     "HaoDu"
@@ -13,7 +13,7 @@ tags:
 ---
 
 ## 前言
-在[GitHub](https://github.com/php-cpm/clean-code-php)看到一篇关于简洁的 `PHP`代码的文章，觉得写的不错，决定自己翻译一遍。
+在[GitHub](https://github.com/php-cpm/clean-code-php)看到一篇关于简洁的 `PHP` 代码的文章，作者参考了《Clean Code》，觉得写的不错，决定自己翻译一遍。
 原文地址:https://github.com/jupeter/clean-code-php
 
 ---
@@ -51,7 +51,7 @@ tags:
  ```
 ### 使用可查找的变量(part 1)
 
- 我们读代码的量远超我们写代码的多量。因此，写出可阅读和便于搜索的代码是及其重要的。在我们的程序中写出一些难以理解的变量名
+ 我们读代码的量远超我们写代码的量。因此，写出可阅读和便于搜索的代码是及其重要的。如果不使用有意义的可理解的变量名称
  会让读代码的人受到成吨伤害。
  因此，让你的变量便于搜索吧。
  
@@ -82,7 +82,7 @@ if ($user- access & 4) {
 }
 
 // What's going on here?
-$user- access ^= 2;
+$user- access ^= 2; //按位异 等
 ```
 
 友好的:
@@ -107,7 +107,7 @@ if ($user- access & User::ACCESS_UPDATE) {
 $user- access ^= User::ACCESS_CREATE;
 
 ```
-### ==使用解释型变量==
+### 使用解释型变量
 
  不友好的
  
@@ -134,7 +134,7 @@ $user- access ^= User::ACCESS_CREATE;
  
  友好的:
  
-  通过对子模式的重命名减少了我们对正则的熟悉和依赖程度。
+  通过对子模式的重命名减少了我们对正则的依赖程度。
  
  ```php
  $address = 'One Infinite Loop, Cupertino 95014';
