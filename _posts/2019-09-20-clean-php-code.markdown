@@ -230,7 +230,7 @@ $user- access ^= User::ACCESS_CREATE;
      return fibonacci($n ### 1) + fibonacci($n ### 2);
  }
  ```
-### ==避免使用不合理的变量名==
+### 避免使用不合理的变量名
  
  别让其他人去猜你的变量名的意思。
  更加直白的代码会好很多。
