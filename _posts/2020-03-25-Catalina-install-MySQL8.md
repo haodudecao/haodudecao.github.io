@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Mac os Catalina 10.15.2 (19C57) 下安装 MySQL 8.0.9"
+subtitle: "f**k Catalina f**k Tim Apple"
 author: "HaoDu"
 tags:
   - Mac
