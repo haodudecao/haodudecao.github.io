@@ -9,7 +9,6 @@ node_modules
 .DS_Store
 */.DS_Store
 */*/.DS_Store
-.idea/huxpro.github.io.iml
 .idea/workspace.xml
 .idea/vcs.xml
 .idea/modules.xml

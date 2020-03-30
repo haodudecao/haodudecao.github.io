@@ -3,8 +3,8 @@ title: HaoDu Blog
 SEOTitle: 好毒的草的博客 | HDDC Blog
 header-img: img/home-bg.jpg
 email: haodudecao@gmail.com
-description: "关于程序与设计、黑客与画家 | 好毒的草，Software Engineer | 这里是 @好毒的草 的个人博客，与你一起发现更大的世界。"
-keyword: "好毒的草, 好毒的草, , @好毒的草, 好毒的草的博客, haodudecao Blog, 博客, 个人网站, 互联网, Web, PHP, 后端"
+description: "好毒的草| 这里是 @好毒的草 的个人博客。"
+keyword: "好毒的草, @好毒的草, 好毒的草的博客, haodudecao Blog, 博客, 个人网站, 互联网, Web, PHP, 后端"
 url: "https://google.com"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
