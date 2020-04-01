@@ -19,9 +19,9 @@ tags:
 mysql -uroot 
 
 ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
-```
- 想到可能是服务没启动
- 
+``` 
+<br>
+ 想到可能是服务没启动<br>
 2. 启动服务
 
 ```
