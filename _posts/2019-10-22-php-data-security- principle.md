@@ -9,8 +9,7 @@ tags:
 
 1. 提交变量进数据库时，我们必须使用`addslashes()`进行过滤，像注入问题，一个`addslashes()`也就搞定了。其实在涉及到变量取值时，`intval()`函数对字符串的过滤也是个不错的选择。
 2. ~~在 php.ini 中开启magic_quotes_gpc和magic_quotes_runtime。
-magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_runtime对于进出数据库的数据可以起到格式话的作用。其实，早在以前注入很疯狂时，这个参数就很流行了。~~
-
+magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_runtime对于进出数据库的数据可以起到格式话的作用。其实，早在以前注入很疯狂时，这个参数就很流行了。~~<br>
 *PHP 5.4 之后这个参数去掉了,必须手动在代码中 用addslashes*
 
 3. 在使用系统函数时，必须使用`escapeshellarg()`,`escapeshellcmd()`参数去过滤，这样你也就可以放心的使用系统函数。
