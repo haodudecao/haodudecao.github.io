@@ -34,44 +34,44 @@ tags:
 首先找到 [CSDN](https://blog.csdn.net/liyuxing6639801/article/details/84894656)，然后根据文中链接找到    [stackoverflow](https://stackoverflow.com/questions/9624774/after-mysql-install-via-brew-i-get-the-error-the-server-quit-without-updating)
 乱七八糟都试过了，mysql 也卸载重装了（brew 安装好慢啊，一直失败，挂着梯子才能进行下去），还是不行……
 
-```
-brew remove mysql
-brew cleanup
-brew install mysql
-```
+    ```
+    brew remove mysql
+    brew cleanup
+    brew install mysql
+    ```
 其中有一条解决方案说是删除 *.err 文件
 虽然没能解决问题，但是却是解决问题的引子
 4. 发现错误日志 好奇就点进去看了看
 
-```
-tail -f /usr/local/var/mysql/HDDC.local.err
-```
+    ```
+    tail -f /usr/local/var/mysql/HDDC.local.err
+    ```
 这下发现问题了，
-
-```
-2020-03-25T13:41:57.733840Z 0 [ERROR] [MY-000077] [Server] /usr/local/opt/mysql/bin/mysqld: Error while setting value 'NO_AUTO_VALUE_ON_ZERO,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,PIPES_AS_CONCAT,ANSI_QUOTES' to 'sql_mode'.
-2020-03-25T13:41:57.734431Z 0 [ERROR] [MY-010119] [Server] Aborting
-2020-03-25T13:41:57.734517Z 0 [Note] [MY-010120] [Server] Binlog end
-2020-03-25T13:41:57.6NZ mysqld_safe mysqld from pid file /usr/local/var/mysql/HDDC.local.pid ended
-2020-03-25T13:42:08.6NZ mysqld_safe Logging to '/usr/local/var/mysql/HDDC.local.err'.
-2020-03-25T13:42:08.6NZ mysqld_safe Starting mysqld daemon with databases from /usr/local/var/mysql
-mysqld: [Warning] World-writable config file '/usr/local/var/mysql/mysqld-auto.cnf' is ignored.
-```
+    
+    ```
+    2020-03-25T13:41:57.733840Z 0 [ERROR] [MY-000077] [Server] /usr/local/opt/mysql/bin/mysqld: Error while setting value 'NO_AUTO_VALUE_ON_ZERO,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,PIPES_AS_CONCAT,ANSI_QUOTES' to 'sql_mode'.
+    2020-03-25T13:41:57.734431Z 0 [ERROR] [MY-010119] [Server] Aborting
+    2020-03-25T13:41:57.734517Z 0 [Note] [MY-010120] [Server] Binlog end
+    2020-03-25T13:41:57.6NZ mysqld_safe mysqld from pid file /usr/local/var/mysql/HDDC.local.pid ended
+    2020-03-25T13:42:08.6NZ mysqld_safe Logging to '/usr/local/var/mysql/HDDC.local.err'.
+    2020-03-25T13:42:08.6NZ mysqld_safe Starting mysqld daemon with databases from /usr/local/var/mysql
+    mysqld: [Warning] World-writable config file '/usr/local/var/mysql/mysqld-auto.cnf' is ignored.
+    ```
 看意思是写入 sql_mode 失败，根据 error code MY-000077（这个很关键也很实用的技巧，错误码可以快速定位问题）
 搜索发现解决方案是去 my.cnf 注释掉 sql_mod 行即可
 5. 找到 my.cnf
 
-```
-find / -name my.cnf
-/usr/local/etc/my.cnf
-```
+    ```
+    find / -name my.cnf
+    /usr/local/etc/my.cnf
+    ```
 注释掉 sql_mode 行之后，错误日志还是不断更新（大概是因为设置了自动开启，系统不断自动尝试启动 MySQL）同样的错误。
 6. 无奈之际，输错了 my.cnf 的路径
 
-
-```
-vim /etc/my.cnf
-```
+    
+    ```
+    vim /etc/my.cnf
+    ```
 发现了这还有个 my.cnf 文件…… 注释 sql_mode 行，保存，查看错误日志，启动成功了……
 
 ```
