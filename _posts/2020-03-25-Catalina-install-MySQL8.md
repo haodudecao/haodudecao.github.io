@@ -29,9 +29,7 @@ tags:
     
         . ERROR! The server quit without updating PID file (/usr/local/var/mysql/HDDC.local.pid).
      ```
-3. 根据报错，在网上找到了一大堆解决方案，逐一试验，都没有用：
-
-首先找到 [CSDN](https://blog.csdn.net/liyuxing6639801/article/details/84894656)，然后根据文中链接找到    [stackoverflow](https://stackoverflow.com/questions/9624774/after-mysql-install-via-brew-i-get-the-error-the-server-quit-without-updating)
+3. 根据报错，在网上找到了一大堆解决方案，逐一试验，都没有用：<br>首先找到 [CSDN](https://blog.csdn.net/liyuxing6639801/article/details/84894656)，然后根据文中链接找到    [stackoverflow](https://stackoverflow.com/questions/9624774/after-mysql-install-via-brew-i-get-the-error-the-server-quit-without-updating)
 乱七八糟都试过了，mysql 也卸载重装了（brew 安装好慢啊，一直失败，挂着梯子才能进行下去），还是不行……
 
     ```
