@@ -15,14 +15,14 @@ tags:
 
 1. 先尝试在 terminal 中启动 mysql
 
-```
-mysql -uroot 
+    ```
+    mysql -uroot 
 
-ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
-``` 
+    ERROR 2002 (HY000): Can't connect to local MySQL server through     socket '/tmp/mysql.sock' (2)
+    ``` 
 <br>
  想到可能是服务没启动test<br>
-2. 启动服务
+2.  启动服务
 
 ```
 mysql.server restart
