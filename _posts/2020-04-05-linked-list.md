@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linked List"
-subtitle: ""
+subtitle: "「Data Structure」- Linked List"
 author: "HaoDu"
 tags:
   - DataStructure
