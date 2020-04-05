@@ -4,8 +4,7 @@ title: "Linked List"
 subtitle: ""
 author: "HaoDu"
 tags:
-  - Mac
-  - MySQL
+  - DataStructure
 ---
 Linked list
 
