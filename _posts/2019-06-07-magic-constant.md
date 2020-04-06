@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Magic Constant"
-subtitle: "「Data Structure」- Linked List"
+title: "Magic Constants"
+subtitle: ""
 author: "HaoDu"
 tags:
-  - DataStructure
+  - PHP
 ---
 
 魔术常量
