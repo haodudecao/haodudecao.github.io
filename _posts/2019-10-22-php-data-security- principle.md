@@ -37,7 +37,6 @@ strip_tags($text,);
 ## 函数详解
 #### htmlspecialchars() 函数把预定义的字符转换为 HTML 实体。
 
-预定义的字符是：
 字符|替换后
 ---|---
  & （和号）| \&amp;
