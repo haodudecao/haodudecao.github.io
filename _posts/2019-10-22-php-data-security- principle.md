@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "PHP 提交数据安全过滤的基本原则"
+subtitle: "PHP Fundamental principles for secure filtering of submitted data "
 author: "HaoDu"
 tags:
   - PHP
