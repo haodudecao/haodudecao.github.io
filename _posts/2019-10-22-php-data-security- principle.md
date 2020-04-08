@@ -16,6 +16,7 @@ magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_
 
 3. 在使用系统函数时，必须使用`escapeshellarg()`,`escapeshellcmd()`参数去过滤，这样你也就可以放心的使用系统函数。
 4. 对于跨站，`strip_tags()`,`htmlspecialchars()`两个参数都不错，对于用户提交的的带有html和php的标记都将进行转换。比如尖括号"<"就将转化为 "\&lt;"这样无害的字符。
+
 ```php
 $new = htmlspecialchars("<a href='test'>Test</a>", ENT_QUOTES);
 strip_tags($text,);
