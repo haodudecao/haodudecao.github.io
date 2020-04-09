@@ -21,7 +21,8 @@ tags:
 
 但是最初为什么函数被设计为 case insensitive？
 
-PHP 之父 Rasmus 在一个访谈中说：“...I then wrote a very simple parser that would pick tags out of HTML files and replace them with the output of the corresponding functions in the C library... The simple parser slowly grew to include conditional tags, then loop tags, functions, etc. At no point did I think I was writing a scripting language. I was simply adding a little bit of functionality to the macro replacement parser. I was still writing all my real business logic in C.”
+PHP 之父 Rasmus 在一个访谈中说：
+>“...I then wrote a very simple parser that would pick tags out of HTML files and replace them with the output of the corresponding functions in the C library... The simple parser slowly grew to include conditional tags, then loop tags, functions, etc. At no point did I think I was writing a scripting language. I was simply adding a little bit of functionality to the macro replacement parser. I was still writing all my real business logic in C.”
 
 这里透露出许多信息。其实最初的 PHP 也许比今天更接近一个模板引擎！早期 PHP 就是“宏替换（macro replacement）”，而业务逻辑并不是它的职责。宏替换具体来说是将 HTML 中的某些 tag 替换为 C 写的对应函数的输出。所以爆栈的这个回答里说，因为 HTML tag 是 case insensitive 的，所以在查找对应函数时，就按照 case insensitive 的方式了。后来的 PHP 虽然已经变得完全不同，但函数名就一直 case insensitive 了。
 
@@ -51,7 +52,7 @@ PHP 有 goto 语句！可以跳转到指定的 label。goto 作为关键字，�
 
 PHP 的函数命名的不一致是被很多人诟病的，如 Problems with PHP 写到：
 
-No consistent naming convention is used. Some functions are verb_noun() and others are noun_verb(). Some are underscore_separated, while others are CamelCase or runtogether. Some are prefixed_byModuleName, and others use a module_suffix_scheme. Some use "to" and others use "2". And if you take a random set of ten library functions, chances are half a dozen different conventions will be included.
+>No consistent naming convention is used. Some functions are verb_noun() and others are noun_verb(). Some are underscore_separated, while others are CamelCase or runtogether. Some are prefixed_byModuleName, and others use a module_suffix_scheme. Some use "to" and others use "2". And if you take a random set of ten library functions, chances are half a dozen different conventions will be included.
 
 对此，在「PHP 是最好的语言」这个梗是怎么来的？这个回答中，
 @涛吴
