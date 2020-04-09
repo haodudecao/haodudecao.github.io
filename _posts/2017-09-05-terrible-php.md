@@ -58,12 +58,11 @@ No consistent naming convention is used. Some functions are verb_noun() and othe
  写道：
 
 
-……告诉你一个简单的例子来说明 PHP 有多匪夷所思：PHP 的核心函数命名很不一致，有 「strptime」这样类 C 函数的名字，有「nl2br」这样的简写，却也有「htmlspecialchars」这样的长名。后来人们发现这种不一致并非偶然，而是当 PHP 还是只有不到一百个函数的小语言的时候，其作者决定用函数名的字符数量——来作为函数的 hash（！）。由于这个愚不可及的决定，PHP 的函数名长度要尽可能地长短有秩、均匀分布，影响一直延续至今。
+>……告诉你一个简单的例子来说明 PHP 有多匪夷所思：PHP 的核心函数命名很不一致，有 「strptime」这样类 C 函数的名字，有「nl2br」这样的简写，却也有「htmlspecialchars」这样的长名。后来人们发现这种不一致并非偶然，而是当 PHP 还是只有不到一百个函数的小语言的时候，其作者决定用函数名的字符数量——来作为函数的 hash（！）。由于这个愚不可及的决定，PHP 的函数名长度要尽可能地长短有秩、均匀分布，影响一直延续至今。
+
 乍一看，只觉得匪夷所思，不过作者给了出处。用函数名的字符长度作为hash这个说法来自于 http://news.php.net/php.internals/70691，PHP 的创造者 Rasmus 写道：
 
-Well, there were other factors in play there. htmlspecialchars was a very early function. Back when PHP had less than 100 functions and the function hashing mechanism was strlen(). In order to get a nice hash distribution of function names across the various function name lengths names were picked specifically to make them fit into a specific length bucket. This was circa late 1994 when PHP was a tool just for my own personal use and I wasn't too worried about not being able to remember the few function names.
-
--Rasmus
+>Well, there were other factors in play there. htmlspecialchars was a very early function. Back when PHP had less than 100 functions and the function hashing mechanism was strlen(). In order to get a nice hash distribution of function names across the various function name lengths names were picked specifically to make them fit into a specific length bucket. This was circa late 1994 when PHP was a tool just for my own personal use and I wasn't too worried about not being able to remember the few function names.-Rasmus
 
 
 一开始，我觉得是不是 Rasmus 是开玩笑的？甚至如果不知道这是 Rasmus 本人写的，我都怀疑是不是来“钓鱼”的。
@@ -71,6 +70,7 @@ Well, there were other factors in play there. htmlspecialchars was a very early 
 所以我特意查看了PHP的老代码。在 PHP 1.99s 和 2.0.1 的代码里确实可以看到，lex.c 文件（题图即为该文件相关源码）里先是创建了一个 cmd_table ，如下：
 
 
+```php
 
 static cmd_table_t cmd_table[PHP_MAX_CMD_LEN+1][PHP_MAX_CMD_NUM+1] = {
   { { NULL,0,NULL } },        /* 0 */
@@ -102,6 +102,8 @@ static cmd_table_t cmd_table[PHP_MAX_CMD_LEN+1][PHP_MAX_CMD_NUM+1] = {
    ...
 
 };
+
+```
 然后在 lexical analyzer 的代码里根据 token 查找指令的函数是这样定义的：
 ```php
 /* Look up a command in the command hash table 
@@ -137,10 +139,11 @@ void IntFunc(char *fnc_name) {
     } 
     i++;
   }
-}```
+}
+```
 
 
-所以，代码证明，确实 PHP 的早期版本就是拿 strlen(fnc_name) 作为 hash 的 ? 。
+所以，代码证明，确实 PHP 的早期版本就是拿 `strlen(fnc_name)` 作为 hash 的 ? 。
 
 
 这则 post 在 reddit 上也不出意外的引发了许多讨论。有人表示这是Rasmus当年做的trade-off，然后遭到许多人的质疑，因为必须得有（相对于缺点的）优点，才谈得上是trade-off，但是拿函数名长度做hash看不出有任何好处。
