@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "PHP 整洁之道"
-subtitle:   "clean PHP code"
+subtitle:   "Clean PHP code"
 date:       2019-09-20
 author:     "HaoDu"
 #header-img: "img/post-bg-learn-english.jpg"

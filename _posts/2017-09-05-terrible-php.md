@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "糟糕的 PHP"
-subtitle: "terrible PHP"
+subtitle: "Terrible PHP"
 author: "HaoDu"
 tags:
   - PHP

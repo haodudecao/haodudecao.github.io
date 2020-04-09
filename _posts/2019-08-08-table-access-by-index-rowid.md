@@ -2,7 +2,7 @@
 layout: post
 title: "MySQL 回表"
 author: "HaoDu"
-subtitle: 'TABLE ACCESS BY INDEX ROWID'
+subtitle: 'Table access by index rowId'
 header-style: text
 date:       2019-08-08
 tags:
