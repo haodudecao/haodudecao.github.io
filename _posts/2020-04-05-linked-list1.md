@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Linked List"
+title: "糟糕的 PHP"
 subtitle: "「Data Structure」- Linked List"
 author: "HaoDu"
 tags:
