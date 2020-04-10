@@ -36,7 +36,7 @@ magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_
 - 显示:  `htmlspecialchars(nl2br($str))`
 
 ## 函数详解
-#### htmlspecialchars() 函数把预定义的字符转换为 HTML 实体。
+#### `htmlspecialchars()` 函数把预定义的字符转换为 HTML 实体。
 
 字符|替换后
 ---|---
