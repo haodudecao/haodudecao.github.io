@@ -36,6 +36,10 @@ magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_
 
 ## 函数详解
 #### `addslashes()` 向字符串中的预定义字符添加反斜杠：
+- single quote (')
+- double quote (")
+- backslash (\)
+- NUL (the NUL byte)
 ```php
 $str = "Who's Bill Gates? -'null'";
      echo $str . " This is not safe in a database query.<br>";
