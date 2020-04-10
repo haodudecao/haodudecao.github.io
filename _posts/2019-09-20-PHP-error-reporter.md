@@ -52,7 +52,9 @@ Notice: Use of undefined constant hello - assumed 'hello'
 
 
 ### Warning 警告级别的错误，程序继续执行
-##### 1、函数调用时，实参没有相应操作（缺参数）
+##### 1、~ 函数调用时，实参没有相应操作（缺参数）~
+过去我们传递参数过少会产生 warning
+php7.1 开始会抛出fatal error
 ```
 function handle_warning($str)
 { 
@@ -61,6 +63,7 @@ function handle_warning($str)
 handle_warning();
 
 Warning: Missing argument 1 for handle_warning(),
+
 ```
 
 ##### 2、函数的使用错误,实参的传入类型错误
@@ -111,7 +114,9 @@ Fatal error: Uncaught TypeError: Argument 1 passed to add() must be of the type 
 
 ##### 6、PHP7.2 使用Object String 作为类名。
 
-
+##### 7 传参过少
+过去我们传递参数过少会产生 warning
+php7.1 开始会抛出fatal error
 
 ### Parse error 解析错误或语法错误,程序终止执行
 ##### 1、未加分号结束符 echo 'test'
