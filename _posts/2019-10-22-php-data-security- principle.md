@@ -47,3 +47,4 @@ magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_
 > （大于）| '&gt;'
 
 #### `htmlentities()` 本函数各方面都和 htmlspecialchars() 一样， 除了  会转换所有具有 HTML 实体的字符。
+一般来说，使用 htmlspecialchars 转化掉基本字符就已经足够了，没有必要使用 htmlentities。实在要使用 htmlentities 时，要注意为第三个参数传递正确的编码。
