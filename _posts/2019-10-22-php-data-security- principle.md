@@ -40,18 +40,14 @@ magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_
 - double quote (")
 - backslash (\)
 - NUL (the NUL byte)
-```php
-$str = "Who's Bill Gates? -'null'";
-     echo $str . " This is not safe in a database query.<br>";
-     echo addslashes($str) . " This is safe in a database query.";
-```
-```php
-Who's Bill Gates? -'null' This is not safe in a database query.
-Who\'s Bill Gates? -\'null\' This is safe in a database query.
 
-```
-
-
+    ```php
+    $str = "Who's Bill Gates? -'null'";
+         echo $str . " This is not safe in a database query.<br>";
+         echo addslashes($str) . " This is safe in a database query.";
+       // Who's Bill Gates? -'null' This is not safe in a database query.
+       // Who\'s Bill Gates? -\'null\' This is safe in a database query.
+    ```
 #### `htmlspecialchars()` 函数把预定义的字符转换为 HTML 实体。
 
 字符|替换后
