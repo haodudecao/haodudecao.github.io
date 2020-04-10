@@ -20,7 +20,6 @@ magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_
     ```php
     $new = htmlspecialchars("<a href='test'>Test</a>", ENT_QUOTES);
     strip_tags($text,);
-    
     ```
 
     **strip_tags() 会有一个问题，就是当用户在使用 "<" ">" 交流时会过滤掉有用内容**
