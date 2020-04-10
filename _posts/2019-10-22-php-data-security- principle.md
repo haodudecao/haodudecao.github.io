@@ -40,7 +40,7 @@ magic_quotes_gpc可以把get,post,cookie里的引号变为斜杠。magic_quotes_
 
 字符|替换后
 ---|---
- & （和号）| \&amp\;
+ & （和号）| `&amp;`
  " （双引号）| '&quot'; 除非设置了 ENT_NOQUOTES
  ' （单引号）| 设置了 `ENT_QUOTES` 后， '&#039;' (如果是 `ENT_HTML401`) ，或者 '&apos;' (如果是 `ENT_XML1、 ENT_XHTML 或 ENT_HTML5`)。
  < （小于）| '&lt;'
