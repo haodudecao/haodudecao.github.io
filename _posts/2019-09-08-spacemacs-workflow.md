@@ -4,6 +4,7 @@ title: "My Spacemacs Workflow"
 subtitle: 'From Vim to Spacemacs'
 author: "Hux"
 header-style: text
+hidden: true
 tags:
   - Vim
   - Emacs
