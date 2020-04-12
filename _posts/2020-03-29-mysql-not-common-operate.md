@@ -3,6 +3,7 @@ layout: post
 title: "MySQL 不常用操作"
 subtitle: "MySQL not common operate"
 author: "HaoDu"
+catalog: true
 tags:
   - DataStructure
 ---
