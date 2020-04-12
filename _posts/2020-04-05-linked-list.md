@@ -6,7 +6,7 @@ author: "HaoDu"
 tags:
   - DataStructure
 ---
-多字段 in
+### 多字段 `in`
 ```sql
 SELECT
 	department.NAME AS Department,
@@ -27,3 +27,9 @@ WHERE
 	departmentId 
 	)
 ```
+### `any` `all` 关键字
+```sql
+select * from Weather where Temperature > all(select Temperature from Weather where id <3)
+select * from Weather where Temperature > any(select Temperature from Weather where id <3)
+```
+
