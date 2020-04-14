@@ -2,7 +2,7 @@
 layout: post
 title: "MySQL explain"
 subtitle: 'MySQL performance explain'
-author: "Hux"
+author: "HaoDu"
 hidden: true
 header-style: text
 tags:
