@@ -1,12 +1,15 @@
 ---
 layout: post
-title: "MySQL explain"
+title: "Git 将已有的项目添加到 Github"
 subtitle: 'MySQL performance explain'
 author: "HaoDu"
-hidden: true
+hidden: 
+catalog: true
 header-style: text
 tags:
-  - MySQL
+  - Git
+  - Github
+
 ---
 # 1. 目标：
  把本地已经存在的项目，推送到github服务端，实现共享。
