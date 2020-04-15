@@ -8,30 +8,61 @@ header-style: text
 tags:
   - MySQL
 ---
-id: SELECT 查询的标识符. 每个 SELECT 都会自动分配一个唯一的标识符.
-
-select_type: SELECT 查询的类型.
-
-table: 查询的是哪个表
-
-partitions: 匹配的分区
-
-`type`: join 类型
-
-possible_keys: 此次查询中可能选用的索引
-
-key: 此次查询中确切使用到的索引.
-
-ref: 哪个字段或常数与 key 一起被使用
-
-`rows`: 显示此查询一共扫描了多少行. 这个是一个估计值.
-
-filtered: 表示此查询条件所过滤的数据的百分比
-
-extra: 额外的信息
-
-type 类型的性能比较
-
-ALL < index < range ~ index_merge < ref < eq_ref < const < system
-
-最左前缀原则： 2.当b+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性。
+# 1. 目标：
+ 把本地已经存在的项目，推送到github服务端，实现共享。
+ 
+ # 2. 实现步骤：
+ ## (1). 先从github创建一个空的仓库
+ 
+ 先从github创建一个空的仓库，并复制链接地址
+ 
+ ## (2). 初始化本地仓库，并提交内容到本地
+ 需要先打开 命令行终端，然后通过 cd 命令切换到需要添加到github 的项目的目录下，然后依次执行如下命令， 具体命令及其含义如下：
+ ### 1). touch README.md
+ 
+ > 创建说明文档，
+ ### 2)初始化本地仓库
+ 
+ ```
+ git init
+ ```
+ ###  3)添加全部已经修改的文件，准备commit 提交
+ 
+ 该命令效果等同于 git add -A
+ 
+ ```
+ git add .
+ ```
+ ###  4)将修改后的文件提交到本地仓库，如：git commit -m ‘增加README.md说明文档’
+ 
+ ```
+ git commit -m ‘提交说明’
+ ```
+ ## (3). 连接到远程仓库，并将代码同步到远程仓库
+ 
+ ### 1). git remote add origin 远程仓库地址
+ > 连接到远程仓库并为该仓库创建别名 , 别名为origin . 这个别名是自定义的，通常用origin ; 远程仓库地址，就是你自己新建的那个仓库的地址，复制地址的方法参考 第二张图。
+ 如：git remote add origin https://github.com/CnPeng/MyCustomAlertDialog.git 这段代码的含义是： 连接到github上https://github.com/CnPeng/MyCustomAlertDialog.git 这个仓库，并创建别名为origin . （之后push 或者pull 的时候就需要使用到这个 origin 别名）
+ 
+ ### 2). git push -u origin master
+ > 创建一个 upStream （上传流），并将本地代码通过这个 upStream 推送到 别名为 origin 的仓库中的 master 分支上
+ -u ，就是创建 upStream 上传流，如果没有这个上传流就无法将代码推送到 github；同时，这个 upStream 只需要在初次推送代码的时候创建，以后就不用创建了
+ 另外，在初次 push 代码的时候，可能会因为网络等原因导致命令行终端上的内容一直没有变化，耐心等待一会就好。
+ 
+ 
+ ## (4). 继续修改本地代码，然后提交并推送到github
+ 做完上面三个步骤之后，就实现了将本地代码同步到github的功能，接下来要做的事情就是继续修改代码，然后提交并推送到github
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
