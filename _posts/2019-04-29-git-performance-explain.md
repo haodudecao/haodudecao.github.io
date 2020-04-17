@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Git 将已有的项目添加到 Github"
-subtitle: ''
+subtitle: 'Upload project to Github'
 author: "HaoDu"
 hidden: 
 catalog: true
