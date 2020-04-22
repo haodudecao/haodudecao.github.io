@@ -53,7 +53,7 @@ function lengthOfLongestSubstring($s)
 
 一直维持这样的队列，找出队列出现最长的长度时候，求出解！
 
-时间复杂度：O(n)O(n);
+时间复杂度：O(n);
 
 ```php
 $s = 'abcabcad';
