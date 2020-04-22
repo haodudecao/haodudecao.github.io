@@ -19,6 +19,7 @@ tags:
       public $next = null;
       function __construct($val) { $this->val = $val; }
   }
+  
   ```
   `2->4->3` 这样一个链表打印出来是这样的
   
