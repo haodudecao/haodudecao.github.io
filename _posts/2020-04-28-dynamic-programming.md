@@ -78,8 +78,8 @@ function longestPalindrome($s)
 
 以 'hello' 和 'loop' 两个词为例
 
-h|e|l|l|o
----|---|---|---|---
+^|h|e|l|l|o
+---|---|---|---|---|---
 l|0|0|1|0
 o|0|0|0|2
 o|0|0|0|1
