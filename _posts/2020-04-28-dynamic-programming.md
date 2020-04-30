@@ -243,6 +243,7 @@ function longestPalindrome($s)
 }
 
 ```
+不过为啥最后执行效率没比暴力解法高多少呢...
 
 
 ### 3.中心扩展
