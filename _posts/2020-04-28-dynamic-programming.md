@@ -157,6 +157,8 @@ function getLongestSameSubstr($str1, $str2)
     $maxlen = 0;
     $matrix = [];
     for ($i = 0, $len1 = strlen($str1);$i < $len1;$i++) {
+        if ($maxlen >= $len1)
+            break;//若不加这一行,超长回文串会超时(有效避免无效循环)
         for($j = 0,$len2 = strlen($str2);$j < $len2;$j++){
             if ($str1[$i] == $str2[$j]) {
                 $matrix[$i][$j] = ($matrix[$i - 1][$j - 1] ?? 0) + 1 ;
