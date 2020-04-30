@@ -109,10 +109,15 @@ int(2)
 int(1)
 int(0)
 ```
-代码如下
+
+最长公共子串代码如下
 ```php
+    
     $str1 = 'hello';
     $str2 = 'loop';
+    /**
+     * 动态规划求最长公共子串
+     */
     function getLongestSameSubstr($str1, $str2)
     {
         $substr = [];
@@ -122,19 +127,65 @@ int(0)
             for($j = 0,$len2 = strlen($str2);$j < $len2;$j++){
                 if ($str1[$i] == $str2[$j]) {
                     $matrix[$i][$j] = ($matrix[$i - 1][$j - 1] ?? 0) + 1 ;
+                    $str = substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j]);
+                    if ($matrix[$i][$j] > $maxlen) {
+                        $maxlen = $matrix[$i][$j];
+                        $substr = [$str];
+                    } elseif ($matrix[$i][$j] == $maxlen) {
+                        $substr [] = $str;
+                    }
                 } else {
                     $matrix[$i][$j] = 0;
-                }
-                if ($matrix[$i][$j] > $maxlen) {
-                    $maxlen = $matrix[$i][$j];
-                    $substr = [substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j])];
-                } elseif ($matrix[$i][$j] == $maxlen) {
-                    $substr [] = substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j]);
                 }
             }
         }
         return ['substr' => $substr, 'maxlen' => $maxlen];
     }
+    
+    function longestPalindrome ($s){
+        $revStr =  
+    }
+
+```
+
+求最长回文串
+```php
+function getLongestSameSubstr($str1, $str2)
+{
+    $substr = [];
+    $maxlen = 0;
+    $matrix = [];
+    for ($i = 0, $len1 = strlen($str1);$i < $len1;$i++) {
+        for($j = 0,$len2 = strlen($str2);$j < $len2;$j++){
+            if ($str1[$i] == $str2[$j]) {
+                $matrix[$i][$j] = ($matrix[$i - 1][$j - 1] ?? 0) + 1 ;
+                //根据应用场景,在此处添加判断是否是回文的代码
+                $str = substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j]);
+                if (!in_array($str, $substr, true)) {
+                    if ($str != strrev($str)) {
+                        continue;
+                    }
+                    if ($matrix[$i][$j] > $maxlen) {
+                        $maxlen = $matrix[$i][$j];
+                        $substr = [$str];
+                    } elseif ($matrix[$i][$j] == $maxlen) {
+                        $substr [] = $str;
+                    }
+                }
+            } else {
+                $matrix[$i][$j] = 0;
+            }
+        }
+    }
+    return ['substr' => $substr, 'maxlen' => $maxlen];
+}
+
+function longestPalindrome1($s)
+{
+    $revStr = strrev($s);
+    return current(getLongestSameSubstr($s, $revStr)['substr']);
+
+}
 
 ```
 
