@@ -181,7 +181,7 @@ function getLongestSameSubstr($str1, $str2)
     return ['substr' => $substr, 'maxlen' => $maxlen];
 }
 
-function longestPalindrome1($s)
+function longestPalindrome($s)
 {
     $revStr = strrev($s);
     return current(getLongestSameSubstr($s, $revStr)['substr']);
