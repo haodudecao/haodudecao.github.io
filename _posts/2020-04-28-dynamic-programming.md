@@ -82,11 +82,33 @@ function longestPalindrome($s)
 
 ^|h|e|l|l|o
 ---|---|---|---|---|---
-l|0|0|1|0|0
-o|0|0|0|1|1
-o|0|0|0|1|2
+l|0|0|1|1|0
+o|0|0|0|0|2
+o|0|0|0|0|1
 p|0|0|0|0|0
-
+```php
+//对应代码执行结果,实践出真知,一开始先写表格,写的是错的👿
+int(0)
+int(0)
+int(0)
+int(0)
+int(0)
+int(0)
+int(0)
+int(0)
+int(1)
+int(0)
+int(0)
+int(0)
+int(1)
+int(0)
+int(0)
+int(0)
+int(0)
+int(2)
+int(1)
+int(0)
+```
 代码如下
 ```php
     $str1 = 'hello';
@@ -99,14 +121,15 @@ p|0|0|0|0|0
         for ($i = 0, $len1 = strlen($str1);$i < $len1;$i++) {
             for($j = 0,$len2 = strlen($str2);$j < $len2;$j++){
                 if ($str1[$i] == $str2[$j]) {
-                    $matrix[$i][$j] = isset($matrix[$i - 1][$j - 1]) ? $matrix[$i - 1][$j - 1] + 1 : 0;
+                    $matrix[$i][$j] = ($matrix[$i - 1][$j - 1] ?? 0) + 1 ;
                 } else {
                     $matrix[$i][$j] = 0;
                 }
                 if ($matrix[$i][$j] > $maxlen) {
+                    $maxlen = $matrix[$i][$j];
                     $substr = [substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j])];
-                } elseif ($matrix[$i][$j] == $maxlen){
-                    $substr []= substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j]);
+                } elseif ($matrix[$i][$j] == $maxlen) {
+                    $substr [] = substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j]);
                 }
             }
         }
