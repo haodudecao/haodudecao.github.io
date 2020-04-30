@@ -73,6 +73,8 @@ function longestPalindrome($s)
 #### 2.1 基本思路是将字符串翻转,然后求两个串的最长公共子串
 #### 2.2 求最长公共子串的过程用到动态规划算法，
 >矩阵思想：定义一个矩阵，宽和高分别为两个字符串的长度。从上到下、从左到右逐个扫描，每次扫描要比较矩阵中每个点对应的行列字符是否相等， 相等的话等于左上邻+1，不相等则置为0。
+
+*注 :为什么等于左上邻+1,左上邻代表两个字符串的各自前一个元素，如果前一个元素是对应相等的，且当前位置的对应元素也相等，那么公共字符串的长度需要+1，因此等于左上邻+1。
                             
 时间复杂度：矩阵中的长和宽的乘积即为复杂度。复杂度为O(mn)。***(并不是两个 for 循环，时间复杂度就是平方级)***
 
@@ -85,8 +87,31 @@ o|0|0|0|1|1
 o|0|0|0|1|2
 p|0|0|0|0|0
 
+代码如下
 ```php
-
+    $str1 = 'hello';
+    $str2 = 'loop';
+    function getLongestSameSubstr($str1, $str2)
+    {
+        $substr = [];
+        $maxlen = 0;
+        $matrix = [];
+        for ($i = 0, $len1 = strlen($str1);$i < $len1;$i++) {
+            for($j = 0,$len2 = strlen($str2);$j < $len2;$j++){
+                if ($str1[$i] == $str2[$j]) {
+                    $matrix[$i][$j] = isset($matrix[$i - 1][$j - 1]) ? $matrix[$i - 1][$j - 1] + 1 : 0;
+                } else {
+                    $matrix[$i][$j] = 0;
+                }
+                if ($matrix[$i][$j] > $maxlen) {
+                    $substr = [substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j])];
+                } elseif ($matrix[$i][$j] == $maxlen){
+                    $substr []= substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j]);
+                }
+            }
+        }
+        return ['substr' => $substr, 'maxlen' => $maxlen];
+    }
 
 ```
 
