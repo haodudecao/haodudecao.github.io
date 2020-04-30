@@ -153,7 +153,7 @@ int(0)
 ```php
 function getLongestSameSubstr($str1, $str2)
 {
-    $substr = [];
+    $substr = ['']; //初始化一个空字符串,leetcode 要求如果输入 '' 那么输出也是空
     $maxlen = 0;
     $matrix = [];
     for ($i = 0, $len1 = strlen($str1);$i < $len1;$i++) {
