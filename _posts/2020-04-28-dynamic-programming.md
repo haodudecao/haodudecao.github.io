@@ -157,8 +157,60 @@ function getLongestSameSubstr($str1, $str2)
     $maxlen = 0;
     $matrix = [];
     for ($i = 0, $len1 = strlen($str1);$i < $len1;$i++) {
-        if ($maxlen >= $len1)
-            break;//若不加这一行,超长回文串会超时(有效避免无效循环)
+        for($j = 0,$len2 = strlen($str2);$j < $len2;$j++){
+            if ($str1[$i] == $str2[$j]) {
+                $matrix[$i][$j] = ($matrix[$i - 1][$j - 1] ?? 0) + 1 ;
+                //根据应用场景,在此处添加判断是否是回文的代码
+                $str = substr($str1, $i - $matrix[$i][$j] + 1, $matrix[$i][$j]);
+                if (!in_array($str, $substr, true)) {
+                    if ($str != strrev($str)) {
+                        continue;
+                    }
+                    if ($matrix[$i][$j] > $maxlen) {
+                        $maxlen = $matrix[$i][$j];
+                        $substr = [$str];
+                    } elseif ($matrix[$i][$j] == $maxlen) {
+                        $substr [] = $str;
+                    }
+                }
+            } else {
+                $matrix[$i][$j] = 0;
+            }
+        }
+    }
+    return ['substr' => $substr, 'maxlen' => $maxlen];
+}
+
+function longestPalindrome($s)
+{
+    $revStr = strrev($s);
+    return current(getLongestSameSubstr($s, $revStr)['substr']);
+
+}
+
+```
+但是这样还是有问题……如题所述，假设该字符串最长 1000个字符且本身就是个回文串，那么矩阵最长就需要扫描 100w 次，很浪费性能
+所以加上 *判断字符串是否包含*
+
+
+求最长回文串
+```php
+function getLongestSameSubstr($str1, $str2)
+{
+    $substr = ['']; //初始化一个空字符串,leetcode 要求如果输入 '' 那么输出也是空
+    $maxlen = 0;
+    $matrix = [];
+    // 判断字符串是否包含
+    if (strlen($str1) > strlen($str2)) {
+        if (strstr($str1, $str2) != '' && $str1 == strrev($str1)) {
+            return  ['substr' => [$str1], 'maxlen' => $maxlen];
+        };
+    } else {
+        if (strstr($str1, $str2) != '' && $str2 == strrev($str2)) {
+            return  ['substr' => [$str2], 'maxlen' => $maxlen];
+        };
+    }
+    for ($i = 0, $len1 = strlen($str1);$i < $len1;$i++) {
         for($j = 0,$len2 = strlen($str2);$j < $len2;$j++){
             if ($str1[$i] == $str2[$j]) {
                 $matrix[$i][$j] = ($matrix[$i - 1][$j - 1] ?? 0) + 1 ;
