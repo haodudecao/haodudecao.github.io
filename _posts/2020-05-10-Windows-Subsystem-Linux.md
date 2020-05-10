@@ -199,7 +199,7 @@ To install it, you can run: npm install --save @/components/common/footBar
 These relative modules were not found:
 
 ```
-网上搜索，发现可能是把文件当作包来处理了
+网上搜索，发现可能是把文件当作依赖包来处理了
 最后发现是 没有 ` footBar` 这个文件， 只有`footbar`...将文件改为大写，完美运行
 
 ```
