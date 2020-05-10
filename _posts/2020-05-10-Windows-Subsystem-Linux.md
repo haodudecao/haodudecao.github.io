@@ -154,7 +154,6 @@ try_files $uri $uri/ /index.php?$query_string;
 rewrite ^/(.*)$ /index.php?_url=/$1;
 
 ```
-==这两句有啥区别，到底要加到哪里。。。==
 ### 根据项目需求不同的php版本  再nginx 配置文件中， include 不一样的php版本（php-fpm)
 
 ### 安装 node.js 和 npm
