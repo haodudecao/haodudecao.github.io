@@ -200,7 +200,7 @@ These relative modules were not found:
 
 ```
 网上搜索，发现可能是把文件当作依赖包来处理了
-最后发现是 没有 ` footBar` 这个文件， 只有`footbar`...将文件改为大写，完美运行
+最后发现是 没有 `footBar` 这个文件， 只有`footbar`...将文件改为大写，完美运行
 
 ```
  DONE  Compiled successfully in 3304ms                                                                                                                                                                                             9:47:46 AM
