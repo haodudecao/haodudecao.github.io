@@ -186,7 +186,7 @@ rewrite ^/(.*)$ /index.php?_url=/$1;
   140  cnpm i
   141  cnpm run  dev
 ```
-npm run dev 的时候，一直遇到这个问题
+`npm run dev` 的时候，一直遇到这个问题
 
 ```
 This dependency was not found:
