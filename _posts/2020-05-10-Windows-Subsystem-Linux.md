@@ -158,13 +158,6 @@ rewrite ^/(.*)$ /index.php?_url=/$1;
 ### 根据项目需求不同的php版本  再nginx 配置文件中， include 不一样的php版本（php-fpm)
 
 ### 安装 node.js 和 npm
-``````
-
-```
- 
-  172  npm install -g cnpm --registry=https://registry.npm.taobao.org
-```
-
 
 ```
   
@@ -178,6 +171,8 @@ rewrite ^/(.*)$ /index.php?_url=/$1;
    91  cd gcoin/
    94  npm config set registry https://registry.npm.taobao.org
    96  cd gcoin-pc/
+     172  npm install -g cnpm --registry=https://registry.npm.taobao.org
+
    97  cnpm i
    98  npm -v
    99  node -v
