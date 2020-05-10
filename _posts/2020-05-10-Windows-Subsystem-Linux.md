@@ -4,8 +4,8 @@ title: "Windows 子系统环境开发"
 subtitle: "Windows-Subsystem-Linux"
 author: "HaoDu"
 catalog: true
-tags:Linux
-  -
+tags:
+  - Linux
 ---
 
 # 起因
