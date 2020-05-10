@@ -1,15 +1,15 @@
 ---
 layout: post
 title: "Windows 子系统环境开发"
-subtitle: "Windows 子系统环境开发"
+subtitle: "Windows-Subsystem-Linux"
 author: "HaoDu"
 catalog: true
-tags:
+tags:Linux
   -
 ---
 
 # 起因
-> 由于项目使用的 PHP 扩展的特殊性（第三方扩展，只有github 源码，只能源码安装,包括swool 和其他一些，swool可能win 还能装），只能在类unix环境下编译安装，办公 PC 又是 windows，所以决定使用 `windows子系统`
+> 由于项目使用的 PHP 扩展的特殊性（第三方扩展，只有github 源码，只能源码安装,包括swool 和其他一些，swool可能win 还能装），只能在类unix环境下编译安装运行，办公 PC 又是 windows，所以决定使用 `windows子系统`
 # 经过
 ## windows 子系统
 **(前提是windows10 必须是最新版，具体版本如下)**
