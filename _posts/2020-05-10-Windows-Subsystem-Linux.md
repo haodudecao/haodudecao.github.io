@@ -31,7 +31,7 @@ windows 应用商店搜索，`linux` 只有 `debian` 系列，下了个 `debian`
 安装完了之后，需要升级到子系统 2 版本，就可以正常启用子系统了
 https://blog.csdn.net/WPwalter/article/details/101508601
 ## 安装lnmp环境
-开始我准备按照之前的 centos 下已有的经验，一个一个来安装，
+开始我准备按照之前的 centos 下已有的经验，一个一个来安装
 ```
 yum install php7.4
 
