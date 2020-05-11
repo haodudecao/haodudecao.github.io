@@ -9,7 +9,7 @@ tags:
 ---
 
 # 起因
-> 由于项目使用的 PHP 扩展的特殊性（第三方扩展，只有github 源码，只能源码安装,包括swool 和其他一些，swool可能win 还能装），只能在类unix环境下编译安装运行，办公 PC 又是 windows，所以决定使用 `windows子系统`
+> 由于项目使用的 PHP 扩展的特殊性（第三方扩展，只有github 源码，只能源码安装,包括swoole 和其他一些），只能在类unix环境下编译安装运行，办公 PC 又是 windows，所以决定使用 `windows子系统`
 
 # 经过
 
@@ -20,8 +20,8 @@ tags:
 选择“开始”按钮 ，然后选择“设置”。
 在“设置”中，依次选择“系统”>“关于”。
 
- field|value
- ---|---
+ |field | value|
+ |---| ---|
 版本 |windows10专业版
 版本号| 2004
 操作系统版本| 19041.207
@@ -211,5 +211,6 @@ These relative modules were not found:
 这一刻还是有点爽的，经历了两天的挫败，终于自己解决了个小问题
 
 
-
++ correct
+- error
 
