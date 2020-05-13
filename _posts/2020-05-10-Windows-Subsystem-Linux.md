@@ -108,13 +108,13 @@ wget http://soft.vpser.net/lnmp/lnmp1.7beta.tar.gz -cO lnmp1.7beta.tar.gz && tar
 
 ## 运行项目
 
-### 子系统和win 上端口会冲突，子系统优先（我遇到的情况是这样的，other说他遇到的是win 优先）
-### 子系统文件无法通过 windows 图形化界面修改文件，提示权限问题（使用root 用户后，重启电脑即可）
-### 电脑重启后，子系统相关软件不能自启动，需要手动（也可写脚本，放到win 自启中）
+#### 子系统和win 上端口会冲突，子系统优先（我遇到的情况是这样的，other说他遇到的是win 优先）
+#### 子系统文件无法通过 windows 图形化界面修改文件，提示权限问题（使用root 用户后，重启电脑即可）
+#### 电脑重启后，子系统相关软件不能自启动，需要手动（也可写脚本，放到win 自启中）
 
-### hosts 文件需要修改win 上的，--我陷入误区，改了子系统中的--；
+#### hosts 文件需要修改win 上的，--我陷入误区，改了子系统中的--；
 
-### 搞好了之后，终于看到报错了，缺少组件 composer update（win下的话 也要加环境变量哦）
+#### 终于看到报错了，缺少组件 composer update（win下的话 也要加环境变量哦）
 composer 也卡，源切到淘宝
 ```
 $ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
@@ -132,9 +132,9 @@ $ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer
 >这意味着，只要你本地有一份composer.lock，你就可以保证无论过去了多久，你都能拉到相同的依赖。而如果你把它纳入你的项目的版本控制中，那么你就可以确保你项目中的每一个人、每一台电脑，不管什么系统，都能拉取到一模一样的依赖，以减少潜在的依赖对部署的影响。当然，请记得，你应该使用的命令是composer install。
 
 >那什么时候该使用composer update呢？当你修改了你的依赖关系，不管是新增了依赖，还是修改了依赖的版本，又或者是删除了依赖，这时候如果你执行composer install的时候，是不会有任何变更的，但你会得到一个警告信息
-### 继续报错，.env 文件不存在以及空格问题
+#### 继续报错，.env 文件不存在以及空格问题
 
-### 跑路由后401，伪静态问题
+#### 跑路由后401，伪静态问题
 laraval伪静态 
 ```
 #try_files $uri $uri/ @rewrite; 
