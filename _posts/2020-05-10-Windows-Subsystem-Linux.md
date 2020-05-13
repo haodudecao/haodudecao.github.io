@@ -143,7 +143,7 @@ try_files $uri $uri/ /index.php?$query_string;
 rewrite ^/(.*)$ /index.php?_url=/$1;
 
 ```
-### 根据项目需求不同的php版本  再nginx 配置文件中， include 不一样的php版本（php-fpm)
+#### 根据项目需求不同的php版本，在 nginx 配置文件中， include 不一样的php版本（php-fpm)
 
 ### 安装 node.js 和 npm
 
