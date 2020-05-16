@@ -155,20 +155,14 @@ rewrite ^/(.*)$ /index.php?_url=/$1;
    170  ln -s /home/node-v12.16.3-linux-x64/bin/npm /usr/local/bin/#软链
    83  cd bin/;
    88  node -v
-   89  cd /home/wwwroot/
-   91  cd gcoin/
-   94  npm config set registry https://registry.npm.taobao.org
-   96  cd gcoin-pc/
-     172  npm install -g cnpm --registry=https://registry.npm.taobao.org
+   89  cd /home/wwwroot/your-project
+   94  npm config set registry https://registry.npm.taobao.org#淘宝镜像
+   172  npm install -g cnpm --registry=https://registry.npm.taobao.org
 
    97  cnpm i
    98  npm -v
    99  node -v
-  101  ls /usr/local/bin/
-  124   npm install --save @/components/common/footBar#这个是 npm 提示，其实不应该安装，这是文件名写错，他当做一个依赖了
-  126  rm -rf ./node_modules#清空
-  128  cnpm i
-  129  npm run  dev
+  124   npm install --save @/components/common/footBar#这个是 npm 提示，其实不应该安装，这是文件名写错，他当做一个依赖了,我开始是直接按照提示进行了错误操作
   131  npm cache clear -f#清空缓存
   132  rm -rf ./node_modules
   133  npm cache clear -f
