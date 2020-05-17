@@ -163,9 +163,8 @@ rewrite ^/(.*)$ /index.php?_url=/$1;
    98  npm -v
    99  node -v
   124   npm install --save @/components/common/footBar#这个是 npm 提示，其实不应该安装，这是文件名写错，他当做一个依赖了,我开始是直接按照提示进行了错误操作
-  131  npm cache clear -f#清空缓存
-  132  rm -rf ./node_modules
-  133  npm cache clear -f
+  132  rm -rf ./node_modules#删除重新安装
+  133  npm cache clear -f#清空缓存
   140  cnpm i
   141  cnpm run  dev
 ```
