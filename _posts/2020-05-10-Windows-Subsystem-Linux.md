@@ -31,7 +31,7 @@ windows 应用商店搜索，`linux` 只有 `debian` 系列，下了个 `debian`
 
 安装完了之后，需要升级到子系统 2 版本，就可以正常启用子系统了
 https://blog.csdn.net/WPwalter/article/details/101508601
-## 安装lnmp环境
+## 安装 LNMP 环境
 开始我准备按照之前的 centos 下已有的经验，一个一个来安装
 ```
 yum install php7.4
@@ -96,7 +96,7 @@ Debian config --default-user root
 win+R，输入 php -m 
 
 
-## 安装lnmp一键包
+## 安装 LNMP 一键包
 lnmp.org  因为项目用的是`PHP7.4` ，只有最新的lnmp 1.7才有，所以我们要安装最新的1.7版本
 
 ```
@@ -105,8 +105,8 @@ wget http://soft.vpser.net/lnmp/lnmp1.7beta.tar.gz -cO lnmp1.7beta.tar.gz && tar
 ```
 
 请注意最后面的lnmp参数，如需要lnmpa 或 lamp 模式，请替换lnmp为你要安装的模式。
-## 子系统自动重启LNMP 
- 因为子系统每次关机都会被关闭，内部不能使用自启lnmp环境，我们可以利用 vbs 和 shell 脚本来实现
+## 子系统自动重启 LNMP  
+ 因为子系统每次关机都会被关闭，内部不能使用自启 LNMP 环境，我们可以利用 vbs 和 shell 脚本来实现
 #### 新建一个vbs，win 会在命令行中运行
 ```vbs
 Set ws = WScript.CreateObject("WScript.Shell")        
