@@ -105,7 +105,45 @@ wget http://soft.vpser.net/lnmp/lnmp1.7beta.tar.gz -cO lnmp1.7beta.tar.gz && tar
 ```
 
 请注意最后面的lnmp参数，如需要lnmpa 或 lamp 模式，请替换lnmp为你要安装的模式。
+## 子系统自动重启LNMP 
+ 因为子系统每次关机都会被关闭，内部不能使用自启lnmp环境，我们可以利用 vbs 和 shell 脚本来实现
+#### 新建一个vbs，win 会在命令行中运行
+```vbs
+Set ws = WScript.CreateObject("WScript.Shell")        
+ws.run "wsl -d Debian -u root /etc/init.wsl"# 你要执行的shell jiaoben
+```
 
+*关闭子系统*
+```
+Set ws = WScript.CreateObject("WScript.Shell")        
+ws.run "wsl --shutdown"
+```
+
+#### shell 脚本
+
+```shell
+#! /bin/sh
+#/etc/init.d/ssh start
+/etc/init.d/mysql start
+#/etc/init.d/php-fpm start
+/etc/init.d/php-fpm7.3 start
+/etc/init.d/nginx start
+/etc/init.d/redis  start
+```
+
+#### 将vbs 放到开机自启中
+
+`win + r` 输入 `shell:startup` 将需要自启的文件放入即可
+
+```shell
+#! /bin/sh
+#/etc/init.d/ssh start
+/etc/init.d/mysql start
+#/etc/init.d/php-fpm start
+/etc/init.d/php-fpm7.3 start
+/etc/init.d/nginx start
+/etc/init.d/redis  start
+```
 ## 运行项目
 
 #### 子系统和win 上端口会冲突，子系统优先（我遇到的情况是这样的，other说他遇到的是win 优先）
