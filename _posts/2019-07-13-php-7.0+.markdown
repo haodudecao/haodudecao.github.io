@@ -875,3 +875,4 @@ $arr{1}
 * http://php.net/manual/zh/migration71.new-features.php
 * http://php.net/manual/zh/migration72.new-features.php
 * http://php.net/manual/zh/migration73.new-features.php
+* http://php.net/manual/zh/migration74.new-features.php
