@@ -8,7 +8,7 @@ tags:
 ---
 
 魔术常量
-```
+```php
 <?php
 namespace myMac;
 
@@ -37,7 +37,7 @@ class c
 (new testClass())->magicConstants();
 ```
 结果
-```
+```php
 __LINE__:250
 __FILE__:/Users/lijunjie/project/testpro/test.php
 __DIR__:/Users/lijunjie/project/testpro
