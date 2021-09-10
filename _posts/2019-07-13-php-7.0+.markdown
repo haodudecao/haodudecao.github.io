@@ -866,10 +866,11 @@ $data['date'] ??= new DateTime();
 
 7.4 不建议的
 
-{数组操作}
+数组操作
 
+```php
 $arr{1}
-  
+```
 ## 参考资料
 * http://php.net/manual/zh/migration70.new-features.php
 * http://php.net/manual/zh/migration71.new-features.php
