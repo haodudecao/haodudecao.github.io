@@ -1,8 +1,10 @@
 ---
-layout: post title: "MySQL 分页优化"
+layout: post 
+title: "MySQL 分页优化"
 subtitle: "MySQL limit offset optimize"
 author: "HaoDu"
-catalog: true tags:
+catalog: true 
+tags:
 
 - MySQL
 
