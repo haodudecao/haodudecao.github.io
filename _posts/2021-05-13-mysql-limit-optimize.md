@@ -1,17 +1,21 @@
 ---
-layout: post
-title: "MySQL 分页优化"
+layout: post title: "MySQL 分页优化"
 subtitle: "MySQL limit offset optimize"
 author: "HaoDu"
-catalog: true
-tags:
-  - MySQL
+catalog: true tags:
+
+- MySQL
 
 ---
+
 ## 原理
+
 ```sql
- select * from user limit 10000,10;
+ select *
+ from user
+ limit 10000,10;
 ```
+
 执行过程：
 
 1.全表扫描，取出 10000 + 10 行
@@ -19,10 +23,15 @@ tags:
 2.舍弃掉前 10000 (offset) 行，留下 10 行
 
 ## 问题
+
 当表的数据足够多，页数足够的大的时候，将造成性能浪费，降低效率。
+
 ## 优化
+
 #### 条件筛选（强制走索引）
+
 laravel 中的 `chuckById` 就是这么做的
+
 ```php
 // src/Illuminate/Database/Concerns/BuildsQueries.php
 /**
@@ -101,20 +110,50 @@ public function forPageAfterId($perPage = 15, $lastId = 0, $column = 'id')
                 ->limit($perPage);
 }
 ```
+
 `chuckById` 每次都会记录本批次最后一个列 `id` 再通过  `forPageAfterId` 方法组成 如下 SQL:
+
 ```sql
-select * from user where `id` > 9000 limit 1000;
+select *
+from user
+where `id` > 9000
+limit 1000;
 ```
+
 `id` 通常设置为自增，我们认为其按顺序排列，那这样可以直接跳过前 9000 行
 
+缺点：不能从第一页跳转到第 n 页
+
+缺点解决方案：前 100 页不做优化，当到 101 页时采用该优化方案，并且不让用户从 101 页进行页面跳转到 1xx 页
+
 #### 子句
+
 原查询：
+
 ```sql
- select * from user limit 10000,10;
+ select *
+ from user
+ limit 10000,10;
 ```
+
 改为子句：
+
 ```sql
- select * from user a ,(select `id` from user limit 10000,10)  b where a.id = b.id;
+ select *
+ from user a,
+      (select `id` from user limit 10000,10) b
+ where a.id = b.id;
 ```
+
 #### 延迟关联
+
+```sql
+SELECT *
+FROM user a
+         inner join(
+    select id
+    from user b
+    LIMIT 10000, 10
+) as users using (id);
+```
 
