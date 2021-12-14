@@ -24,80 +24,80 @@ laravel 中的 `chuckById` 就是这么做的
 ```php
 // src/Illuminate/Database/Concerns/BuildsQueries.php
 /**
-     * Chunk the results of a query by comparing IDs.
-     *
-     * @param  int  $count
-     * @param  callable  $callback
-     * @param  string|null  $column
-     * @param  string|null  $alias
-     * @return bool
-     */
-    public function chunkById($count, callable $callback, $column = null, $alias = null)
-    {
-        $column = $column ?? $this->defaultKeyName();
+ * Chunk the results of a query by comparing IDs.
+ *
+ * @param  int  $count
+ * @param  callable  $callback
+ * @param  string|null  $column
+ * @param  string|null  $alias
+ * @return bool
+ */
+public function chunkById($count, callable $callback, $column = null, $alias = null)
+{
+    $column = $column ?? $this->defaultKeyName();
 
-        $alias = $alias ?? $column;
+    $alias = $alias ?? $column;
 
-        $lastId = null;
+    $lastId = null;
 
-        $page = 1;
+    $page = 1;
 
-        do {
-            $clone = clone $this;
+    do {
+        $clone = clone $this;
 
-            // We'll execute the query for the given page and get the results. If there are
-            // no results we can just break and return from here. When there are results
-            // we will call the callback with the current chunk of these results here.
-            $results = $clone->forPageAfterId($count, $lastId, $column)->get();
+        // We'll execute the query for the given page and get the results. If there are
+        // no results we can just break and return from here. When there are results
+        // we will call the callback with the current chunk of these results here.
+        $results = $clone->forPageAfterId($count, $lastId, $column)->get();
 
-            $countResults = $results->count();
+        $countResults = $results->count();
 
-            if ($countResults == 0) {
-                break;
-            }
+        if ($countResults == 0) {
+            break;
+        }
 
-            // On each chunk result set, we will pass them to the callback and then let the
-            // developer take care of everything within the callback, which allows us to
-            // keep the memory low for spinning through large result sets for working.
-            if ($callback($results, $page) === false) {
-                return false;
-            }
+        // On each chunk result set, we will pass them to the callback and then let the
+        // developer take care of everything within the callback, which allows us to
+        // keep the memory low for spinning through large result sets for working.
+        if ($callback($results, $page) === false) {
+            return false;
+        }
 
-            $lastId = $results->last()->{$alias};
+        $lastId = $results->last()->{$alias};
 
-            if ($lastId === null) {
-                throw new RuntimeException("The chunkById operation was aborted because the [{$alias}] column is not present in the query result.");
-            }
+        if ($lastId === null) {
+            throw new RuntimeException("The chunkById operation was aborted because the [{$alias}] column is not present in the query result.");
+        }
 
-            unset($results);
+        unset($results);
 
-            $page++;
-        } while ($countResults == $count);
+        $page++;
+    } while ($countResults == $count);
 
-        return true;
-    }
+    return true;
+}
 
 // src/Illuminate/Database/Query/Builder.php
 
- /**
-     * Constrain the query to the next "page" of results after a given ID.
-     *
-     * @param  int  $perPage
-     * @param  int|null  $lastId
-     * @param  string  $column
-     * @return $this
-     */
-    public function forPageAfterId($perPage = 15, $lastId = 0, $column = 'id')
-    {
-        $this->orders = $this->removeExistingOrdersFor($column);
+/**
+ * Constrain the query to the next "page" of results after a given ID.
+ *
+ * @param  int  $perPage
+ * @param  int|null  $lastId
+ * @param  string  $column
+ * @return $this
+ */
+public function forPageAfterId($perPage = 15, $lastId = 0, $column = 'id')
+{
+    $this->orders = $this->removeExistingOrdersFor($column);
 
-        if (! is_null($lastId)) {
-            $this->where($column, '>', $lastId);
-        }
-
-        return $this->orderBy($column, 'asc')
-                    ->limit($perPage);
+    if (! is_null($lastId)) {
+        $this->where($column, '>', $lastId);
     }
+
+    return $this->orderBy($column, 'asc')
+                ->limit($perPage);
+}
 ```
 `chuckById` 每次都会记录本批次最后一个列 `id` 再通过  `forPageAfterId` 方法组成 如下 SQL:
 ```sql
