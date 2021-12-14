@@ -105,7 +105,14 @@ select * from user where `id` > 9000 limit 1000;
 ```
 `id` 通常设置为自增，我们认为其按顺序排列，那这样可以直接跳过前 9000 行
 
-####子句
-
+#### 子句
+原查询：
+```sql
+ select * from user limit 10000,10;
+```
+改为子句：
+```sql
+ select * from user a ,(select `id` from user limit 10000,10)  b where a.id = b.id;
+```
 #### 延迟关联
 
