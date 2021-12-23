@@ -12,11 +12,11 @@ update message set content='Hello World' where id in
 ( select min(id) as min_id from message)
 ```
 
-mysql出现
+MySQL 出现
 
 **You can’t specify target table for update in FROM clause**
  
- 这个错误的意思是不能在同一个sql语句中，先select同一个表的某些值，然后再update这个表。
+ 这个错误的意思是不能在同一个 SQL 语句中，先 select 同一个表的某些值，然后再 update 这个表。
 
 ## 解决方法：
 ### 1 join
