@@ -11,7 +11,7 @@ tags:
 
 至于类，你猜是 sensitive 还是 insensitive？
 
-答案是 insensitive。然而通常我们使用 classloader，如果以大小写不一致的方式使用，则在路径是 case sensitive 的 *nix 环境下，就很容易产生问题了。
+答案是 insensitive。然而通常我们使用 classloader，如果以大小写不一致的方式使用，则在路径是 case sensitive 的 *nix 环境下，就很容易产生问题了。(use 类 大小写写错 linux 会报错)
 
 好吧，尽管 PHP 再次体现了奇葩，通常 PHP 程序员并不 care 这个问题，绝大多数人遵循“使用和 manual 一致的大小写”的代码风格。
 
